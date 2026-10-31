@@ -1,0 +1,18 @@
+{
+  "image": "/static/campus-map.png",
+  "width": 1024,
+  "height": 765,
+  "source_page": "https://www.aomori-u.ac.jp/access/",
+  "source_image": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/2f9068135e6ab79b6ca41c134e490cd0-1024x765.png",
+  "retrieved_on": "2026-10-29",
+  "credit": "地図画像：青森大学",
+  "markers": [
+    {"id":"A","x":66.31,"y":72.42},
+    {"id":"B","x":76.76,"y":58.17},
+    {"id":"C","x":58.69,"y":44.84},
+    {"id":"D","x":84.08,"y":68.50},
+    {"id":"E","x":77.93,"y":34.90},
+    {"id":"F","x":67.77,"y":58.30},
+    {"id":"H","x":74.22,"y":68.24}
+  ]
+}

@@ -1,0 +1,188 @@
+# 青森大学 インタラクティブキャンパスガイド
+
+青森大学「プログラミングワークショップⅡ」で制作する、WebとArduino Uno R3を連携したキャンパス案内です。建物名・確認済みの教室番号から施設を探し、公式マップと実物模型のLEDで案内します。
+
+## できること
+- 7施設の一覧・建物名検索・地図からの選択
+- 選択した建物とLED状態の表示、全消灯
+- Arduinoの接続状態と通信エラーの表示、USBポートの選択・再接続
+- 実機と明確に区別したシミュレーション
+- Mac / Windowsの起動スクリプトとブラウザの自動表示
+
+**教室配置の正式データは未提供のため0件です。** 教室検索の仕組みはありますが、未登録番号を建物番号から推測しません。建物名または地図から選んでください。
+
+## 必要な環境
+- Python 3.10以上（WindowsではPython LauncherまたはPATH設定が必要）
+- Chrome、Edge、Safari等の現在のブラウザ
+- 初回セットアップ時のインターネット接続
+- 実機利用時: Arduino Uno R3、データ通信対応USBケーブル、配線済みLED×7
+- 初回書き込み時: VS CodeのPlatformIO IDE拡張、またはPlatformIO CLI
+
+通常起動にはNode.jsやPlatformIOは不要です。初回にPython依存関係を入れたあとは、地図を含めオフラインで動きます。
+
+## 起動
+
+### Mac
+`start.command`をダブルクリックします。ターミナルからも起動できます。
+
+```sh
+./start.command
+```
+
+実行権限がない場合だけ、プロジェクト内で`chmod +x start.command`を実行してください。
+
+### Windows
+`start.bat`をダブルクリックします。
+
+### Arduinoがない場合
+通常起動後、画面下の「接続・動作モードの設定」から「シミュレーション」を選べます。最初からシミュレーションで起動することもできます。
+
+```sh
+# Mac
+./start.command --simulate
+```
+
+```bat
+rem Windows（コマンドプロンプト）
+start.bat --simulate
+```
+
+仮想環境`.venv/`を作成して依存関係を確認し、http://127.0.0.1:5050 を自動表示します。Arduinoが見つからなくてもWebアプリは起動します。通常起動は実機モードで、未接続からシミュレーションへ自動的に切り替わることはありません。
+
+起動したターミナルを開いたまま使い、終了時は**Ctrl+C**を押してください。接続中なら全消灯を試みます。ターミナルの強制終了や切断では消灯確認できませんが、ファームウェアは通信が10秒途絶えると全消灯します。
+
+### 起動オプション
+Macの`./start.command`、Windowsの`start.bat`の後ろに指定します。
+
+| オプション | 意味 |
+| --- | --- |
+| `--simulate` | USBを使わないシミュレーション |
+| `--no-browser` | ブラウザの自動起動を省略 |
+| `--serial-port COM3` | USBポートを明示指定。Macは`/dev/cu.usbmodem...`等 |
+| `--port 5051` | HTTPポートを変更 |
+
+ポートは画面でも選べます。Uno候補が複数、または互換ボードの場合は手動指定してください。環境変数`CAMPUS_SERIAL_PORT`も利用できます。
+
+### 手動セットアップ
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m scripts.run --simulate
+```
+
+Windowsでは`python3`を`py -3`、`.venv/bin/python`を`.venv\Scripts\python.exe`に読み替えてください。VS Codeの「タスクの実行」には実機/シミュレーションの2タスクを用意しています。
+
+## Arduinoの初回準備
+
+| コマンド/地図記号 | 建物 | ピン |
+| --- | --- | --- |
+| A | 1号館 | D2 |
+| B | 3号館 | D3 |
+| C | 4号館 | D4 |
+| D | 5号館 | D5 |
+| E | 6号館 | D6 |
+| F | 7号館 | D7 |
+| H | レストラン棟 | D8 |
+| 0 | 全消灯 | — |
+
+各ピン→220〜330Ω抵抗→LED→GNDと配線します。LEDごとに抵抗が必要です。詳細は[配線と書き込み](docs/HARDWARE.md)を参照してください。
+
+```sh
+cd firmware
+pio run
+pio run --target upload
+```
+
+VS Codeでは`firmware/`をPlatformIOで開いてBuild→Uploadでも書き込めます。初回の書き込み以後は、電源投入時に自動実行されます。アプリの使用前にシリアルモニターを閉じてください。
+
+通信は9600bps、ASCII、LF区切りです。`A\n`に`OK:A\n`、`0\n`に`OK:0\n`が返ります。接続には`READY:CAMPUS:1`の起動通知が必要です。詳しくは[通信設計](docs/ARCHITECTURE.md)を参照してください。
+
+## データの追加
+
+- `data/buildings.json`: 点灯対象7施設とピン、検索用の別名
+- `data/rooms.json`: **確認済み**教室だけ
+- `data/map.json`: 地図画像の出典とマーカー座標（左上からの百分率）
+
+教室を追加するときは、大学の資料または担当者の確認で対応を確定してから、`rooms`配列へ次の形式で記載します。以下は項目の説明であり、正式データにそのままコピーしないでください。
+
+```text
+number: 教室番号（文字列）
+building_id: A/B/C/D/E/F/Hのいずれか
+source: 確認した大学資料・担当者等の情報
+verified_on: 実際の確認日（YYYY-MM-DD）
+```
+
+重複番号、確認元の欠落、対象外の建物、未来の確認日は起動時に拒否します。変更後はアプリを再起動してください。全角英数字と空白は検索時に正規化します。
+
+地図は[青森大学公式アクセスページ](https://www.aomori-u.ac.jp/access/)の画像を保存して使用しています。出典、取得日、権利の扱いは[企画経緯](docs/PROJECT_CONTEXT.md)に記録しています。地図画像を差し替えた場合は全マーカーの座標を見直してください。
+
+## プロジェクト構成
+
+```text
+AGENTS.md                  Codex向け開発指示
+README.md / requirements.txt
+docs/
+  PROJECT_CONTEXT.md       企画経緯・地図出典
+  REQUIREMENTS.md          要件と受入確認
+  ARCHITECTURE.md          通信契約・API・モジュール
+  HARDWARE.md              配線・書き込み・実機チェック
+backend/
+  app.py                   Flask APIと画面配信
+  catalog.py               JSON検証と検索
+  controller.py            USB通信・ACK・モード管理
+frontend/
+  index.html
+  static/                  JavaScript・CSS・公式地図
+firmware/
+  platformio.ini
+  src/main.cpp             Unoプログラム
+data/                      施設・教室・マーカーJSON
+scripts/                   環境準備とサーバー起動
+tests/                     API・検索・模擬通信・ファームウェア論理テスト
+start.command / start.bat
+```
+
+Web Serial APIは使いません。ブラウザ→Fetch→Flask→pySerial→USB→Uno→LEDの順です。WaitressでFlaskアプリをローカルホストだけに配信し、デバッグと自動リロードは無効です。
+
+## テスト
+
+```sh
+.venv/bin/python -m unittest discover -s tests -v
+node --check frontend/static/app.js
+cd firmware
+pio run
+```
+
+Pythonテストは41件。ファームウェアの論理テストはC++コンパイラ（clang++またはg++）があると実行され、ない場合はその1件だけスキップします。論理テストでは実際の`main.cpp`を模擬Arduino上で動かします。Node.jsはJavaScriptの構文確認だけに使用します。
+
+確認できた範囲と、実機・OSごとの未確認項目は[検証記録](docs/VALIDATION.md)にまとめています。実際のLED、USB切断・再接続、Windowsの起動は、展示用機材で受入確認してください。
+
+## 困ったとき
+
+| 症状 | 確認すること |
+| --- | --- |
+| Pythonが見つからない | Python 3.10以上、WindowsのPATH/Launcher |
+| 初回のパッケージ導入失敗 | ネット接続、組織のプロキシ設定。次回起動で再試行できます |
+| 仮想環境を別PCからコピーした | `.venv`はPC間で持ち運ばず、そのPCで作り直す |
+| ブラウザが開かない | ターミナル記載のURLを手動で開く |
+| ポート5050が使用中 | 二重起動を確認、または`--port 5051` |
+| Unoを検出できない | USBケーブル、ポート一覧更新、手動選択、必要なUSBドライバー |
+| 起動通知を確認できない | ファームウェア書き込み、9600bps、他のシリアルアプリ終了。自動RESETしないボードでは接続試行中にRESET |
+| 応答不一致/タイムアウト | USB・配線を確認して再接続。画面の点灯成功表示は行いません |
+| 教室検索が0件 | 未登録番号は案内できません。建物名で検索する |
+
+画面は約2秒ごとに実機状態を照会します。USB抜去直後には前の表示が残る場合があります。次の照会失敗で「状態不明」に変わります。複数タブで開くと点灯状態は全タブで共有され、最後に選択した建物が点灯します。
+
+## Git / GitHub
+
+GitHubの保存先は非公開リポジトリ [880null/aomoriuniv-campus-guide](https://github.com/880null/aomoriuniv-campus-guide) です。`origin`から`main`ブランチを管理します。`.venv/`、Pythonキャッシュ、`.pio/`、秘密情報、OS一時ファイルを除外しています。
+
+変更を保存してGitHubに反映する場合:
+
+```sh
+git add .
+git commit -m "Describe your changes"
+git push
+```
+
+公開する場合は、同梱した大学地図画像の利用条件も大学に確認してください。

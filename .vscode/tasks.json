@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Campus guide: simulation",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/bootstrap.py", "--simulate"],
+      "windows": {"command": "py", "args": ["-3", "scripts/bootstrap.py", "--simulate"]},
+      "problemMatcher": []
+    },
+    {
+      "label": "Campus guide: real hardware",
+      "type": "process",
+      "command": "python3",
+      "args": ["scripts/bootstrap.py"],
+      "windows": {"command": "py", "args": ["-3", "scripts/bootstrap.py"]},
+      "problemMatcher": []
+    }
+  ]
+}
