@@ -1,7 +1,7 @@
 #include <cassert>
 #include <limits>
 #include <string>
-#include "../../firmware/src/main.cpp"
+#include "../../firmware/CampusGuide/src/main.cpp"
 
 void send(const std::string &line) {
   Serial.output.clear();

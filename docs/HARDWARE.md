@@ -17,10 +17,31 @@ Arduino Uno R3、LED×7、抵抗220〜330Ω×7、ブレッドボード、ジャ�
 D0/D1はUSBシリアルに使うため接続しない。通常は選択した1個だけ点灯する。
 
 ## 初回の書き込み
+
+### Arduino IDEを使う場合
+
+1. GitHubの「Code → Download ZIP」で取得し、ZIP全体を展開する。Gitのインストールは不要。
+2. Arduino IDE 2を導入し、`firmware/CampusGuide/CampusGuide.ino`を開く。
+3. Uno R3をデータ通信可能なUSBケーブルで接続する。
+4. 必要に応じボードマネージャーで「Arduino AVR Boards」を導入する。
+5. ボードに「Arduino Uno」、ポートに接続したUnoのポートを指定し、「書き込み」を押す。
+6. 書き込み完了後、シリアルモニターを閉じる。
+7. プロジェクト直下のMac用`start.command` / Windows用`start.bat`を開く。
+
+`.ino`だけを取り出さず、`CampusGuide/src/main.cpp`も含めフォルダーごと使用する。
+実装はこのC++ファイルにあり、Arduino IDEが自動でビルドする。
+Arduino IDEは基板のプログラムを書き込む。PC上のFlaskアプリは起動ファイルで別に立ち上げる。
+PC側にはPython 3.10以上が必要で、初回の依存パッケージ取得にはインターネット接続が必要。
+
+公式手順: https://support.arduino.cc/hc/en-us/articles/4733418441116-Upload-a-sketch-in-Arduino-IDE
+スケッチ構成の仕様: https://docs.arduino.cc/arduino-cli/sketch-specification/
+
+### PlatformIOを使う場合
+
 1. VS CodeにPlatformIO IDE拡張を導入する。
 2. firmware/をPlatformIOプロジェクトとして開く。
 3. Uno R3をUSB接続し、Build → Upload。
-4. アプリとシリアルモニターの同時利用は避け、モニターを閉じてアプリを起動する。
+4. シリアルモニターを閉じて、PC側の起動ファイルを開く。
 
 CLIで行う場合:
 ```sh
@@ -31,6 +52,7 @@ pio device monitor --baud 9600
 ```
 複数機器がある場合は`pio run --target upload --upload-port COM3`等で指定する。
 書き込み済みのプログラムは電源投入時に自動実行される。
+別のPCへ基板をつなぎ替えても、通常は再書き込み不要。PC側のPython環境とアプリは移動先にも用意する。
 
 ## 手動の通信確認
 9600bps、LFで送信。接続直後は`READY:CAMPUS:1`。

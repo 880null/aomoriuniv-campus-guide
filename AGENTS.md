@@ -19,7 +19,7 @@
 ## 構成
 - backend/: API、データ読み込み、排他制御付きLEDコントローラー
 - frontend/: HTMLと静的ファイル。外部CDNへの依存なし
-- firmware/: PlatformIO Unoファームウェア
+- firmware/: Arduino IDE / PlatformIO共通のUnoファームウェア。実装はCampusGuide/src/main.cppに一本化する
 - data/: 施設、地図メタデータ、確認済み教室
 - scripts/: 仮想環境作成と起動
 - tests/: unittest。実在しない教室のテストデータは一時ディレクトリだけに作る

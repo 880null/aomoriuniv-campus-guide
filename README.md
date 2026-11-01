@@ -16,9 +16,22 @@
 - Chrome、Edge、Safari等の現在のブラウザ
 - 初回セットアップ時のインターネット接続
 - 実機利用時: Arduino Uno R3、データ通信対応USBケーブル、配線済みLED×7
-- 初回書き込み時: VS CodeのPlatformIO IDE拡張、またはPlatformIO CLI
+- 初回書き込み時: Arduino IDE 2（またはVS CodeのPlatformIO IDE拡張 / PlatformIO CLI）
 
 通常起動にはNode.jsやPlatformIOは不要です。初回にPython依存関係を入れたあとは、地図を含めオフラインで動きます。
+
+## GitHubからダウンロードして使う
+
+1. [GitHubリポジトリ](https://github.com/880null/aomoriuniv-campus-guide)にログインし、「Code → Download ZIP」で取得して展開します。Gitのインストールは不要です。
+2. PCにPython 3.10以上を用意します。初回の基板書き込み用にArduino IDE 2も用意します。
+3. `firmware/CampusGuide/CampusGuide.ino`をArduino IDEで開き、ボード「Arduino Uno」とUSBポートを選んで「書き込み」を押します。
+4. Arduino IDEのシリアルモニターを閉じます。
+5. 展開したプロジェクト直下の、Windowsなら`start.bat`、Macなら`start.command`を開きます。Webアプリが起動します。
+
+`CampusGuide`フォルダー内の`src/main.cpp`も必要なので、`.ino`だけを取り出さないでください。
+Arduino IDEが起動するのは基板側のプログラムです。PC側のPython/Webアプリは起動ファイルで別に実行します。
+書き込みは初回または基板のプログラム更新時だけ必要です。日常の利用ではUSB接続とPC側の起動ファイルだけで使えます。
+Arduino IDE経由でも、PC側のPython環境・USB認識・ポート選択の確認は必要です。Windows/Macそれぞれでの実行や基板への書き込みの確認状況は、[検証記録](docs/VALIDATION.md)を参照してください。
 
 ## 起動
 
@@ -87,6 +100,10 @@ Windowsでは`python3`を`py -3`、`.venv/bin/python`を`.venv\Scripts\python.ex
 
 各ピン→220〜330Ω抵抗→LED→GNDと配線します。LEDごとに抵抗が必要です。詳細は[配線と書き込み](docs/HARDWARE.md)を参照してください。
 
+Arduino IDE 2で`firmware/CampusGuide/CampusGuide.ino`を開き、ボードとポートを選んで「書き込み」を押します。ボード定義が未導入の場合は「Arduino AVR Boards」を導入します。
+
+PlatformIOを使う場合:
+
 ```sh
 cd firmware
 pio run
@@ -135,7 +152,9 @@ frontend/
   static/                  JavaScript・CSS・公式地図
 firmware/
   platformio.ini
-  src/main.cpp             Unoプログラム
+  CampusGuide/
+    CampusGuide.ino        Arduino IDEで開くファイル
+    src/main.cpp           両方の開発環境で共通のUnoプログラム
 data/                      施設・教室・マーカーJSON
 scripts/                   環境準備とサーバー起動
 tests/                     API・検索・模擬通信・ファームウェア論理テスト

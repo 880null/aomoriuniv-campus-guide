@@ -1,5 +1,7 @@
 #include <Arduino.h>
 
+// Arduino IDEとPlatformIOで共通の実装を使用する。
+
 namespace {
 const char BUILDINGS[] = {'A', 'B', 'C', 'D', 'E', 'F', 'H'};
 const uint8_t LED_PINS[] = {2, 3, 4, 5, 6, 7, 8};

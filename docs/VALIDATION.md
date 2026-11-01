@@ -64,7 +64,7 @@ Ctrl+C相当で終了 → exit 0
 
 ### 方法
 
-`tests/firmware/serial_bridge.cpp`が実際の`firmware/src/main.cpp`を読み込み、別プロセスで実行する。
+`tests/firmware/serial_bridge.cpp`が実際の`firmware/CampusGuide/src/main.cpp`を読み込み、別プロセスで実行する。
 アプリ側はシミュレーションモードではなく、実機モードの`LedController`とpySerial本体を使う。
 macOSの仮想シリアルポートを通し、実際のコマンドとCRLF応答を送受信する。
 検査用の別経路でD2〜D8の模擬出力値を取得し、APIが成功しただけでなくピンの対応も照合する。
@@ -115,6 +115,29 @@ Flash: 2458 / 32256 bytes
 
 USB機器としての実際の認識、DTRによる自動リセットと起動時間、ATmega328P上の実行、電圧・電流、配線、LEDの極性・故障は未確認。
 これらは実物を接続して最終確認する必要がある。ソフトウェアの結合テスト成功を、実機での点灯確認済みとは扱わない。
+
+## 2026-11-01: Arduino IDE形式への対応
+
+- Arduino IDE 2で開く`firmware/CampusGuide/CampusGuide.ino`を追加。
+- 実装を`firmware/CampusGuide/src/main.cpp`へ移し、PlatformIOとArduino IDEで共用。制御ロジックと通信仕様の変更なし。
+- GitHub ZIPの展開から初回書き込み、PC側起動ファイル実行までの手順をREADMEとHARDWAREに追加。
+- Arduino CLI 1.5.1 / 公式Arduino AVR Boards 1.8.8 / `arduino:avr:uno`でスケッチのコンパイル成功。
+- PlatformIOの既存ビルドと、55件の自動テストも成功。
+- Arduino CLIとPlatformIOが生成したHEXファイルがバイト単位で一致することを確認。SHA-256: `cf3f86422cccb9d79f46f91957fbbe908d5458b227ff8442fc70eb9a36b904cf`。
+
+```sh
+arduino-cli core install arduino:avr
+arduino-cli compile --fqbn arduino:avr:uno firmware/CampusGuide
+```
+
+```text
+Sketch uses 2458 bytes of program storage space.
+Global variables use 210 bytes of dynamic memory.
+```
+
+検証ツールとボード定義は一時ディレクトリへ導入した。`--warnings all`では公式AVRコアのnew.cppに未使用引数の警告が4件出るが、プロジェクト側のコンパイル警告・エラーはなかった。
+Arduino IDEのGUI操作と基板への実際の書き込みは未確認。Arduino CLIによるコンパイル確認と区別する。
+Arduino IDEの導入はPC側のPython環境やUSBドライバーの準備を代替しない。Windowsでの実行確認は引き続き必要。
 
 ## 検証の限界と残る受入確認
 

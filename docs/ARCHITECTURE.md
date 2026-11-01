@@ -6,11 +6,13 @@
   → Flask (backend/app.py)
   → LedController (backend/controller.py)
   → pySerial / USB
-  → Uno R3 (firmware/src/main.cpp)
+  → Uno R3 (firmware/CampusGuide/src/main.cpp)
   → 抵抗 + LED
 ```
 
 backend/catalog.py がJSONを検証し、施設と確認済み教室を検索する。
+Arduino IDEはfirmware/CampusGuide/CampusGuide.inoを入口としてsrc/main.cppをビルドする。
+PlatformIOも同じsrc/main.cppをビルドする。Arduino IDE用の実装を別にコピーしない。
 LedController がモード・接続・応答確認済みLED状態を一元管理する。
 実機の起動接続に失敗してもHTTPサーバーは稼働する。
 scripts/run.py は接続を試行し、Waitressで127.0.0.1:5050にFlaskアプリを配信する。

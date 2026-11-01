@@ -7,7 +7,7 @@
 #include <poll.h>
 #include <string>
 #include <unistd.h>
-#include "../../firmware/src/main.cpp"
+#include "../../firmware/CampusGuide/src/main.cpp"
 
 namespace {
 using Clock = std::chrono::steady_clock;
