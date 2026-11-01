@@ -14,7 +14,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_seven_buildings_and_pins(self):
         self.assertEqual({b["id"]: b["pin"] for b in self.catalog.buildings},
-                         dict(A=2, B=3, C=None, D=4, E=5, F=6, H=None))
+                         dict(A=2, B=3, C=None, D=4, E=5, F=6, H=7))
 
     def test_official_rooms_are_empty(self):
         self.assertEqual(self.catalog.rooms, {})

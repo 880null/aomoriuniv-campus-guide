@@ -13,6 +13,10 @@ function setText(element, value) {
   if (element.textContent !== value) element.textContent = value;
 }
 
+function ledNote(building) {
+  return building?.led_note || (building?.pin === null ? "配線未確認" : "");
+}
+
 function showMessage(id, message) {
   setText($(id), message || "");
   $(id).hidden = !message;
@@ -48,6 +52,7 @@ async function api(path, data) {
 function renderState() {
   if (!state) return;
   const simulation = state.mode === "simulation";
+  const wiredCount = buildings.filter((item) => item.pin !== null).length;
   const on = state.led_state === "on";
   const badge = $("connection-badge");
   badge.className = `badge ${simulation ? "simulation" : state.connected ? "connected" : ""}`;
@@ -57,7 +62,7 @@ function renderState() {
   setText(banner, simulation
     ? "シミュレーションモード：画面上で点灯を確認できます。物理LEDへは送信しません。"
     : state.connected
-      ? "実機モード：配線確認済みの5施設をLEDで案内します。4号館・レストラン棟の配線は未確認です。"
+      ? `実機モード：LED設定済みの${wiredCount}施設を案内します。4号館はLED未実装、レストラン棟はD7に仮設定しています。`
       : "実機モード：Arduinoは未接続です。施設の閲覧はできます。実機がない場合は下の設定でシミュレーションに切り替えてください。");
   document.querySelectorAll('input[name="mode"]').forEach((radio) => {
     radio.checked = radio.value === state.mode;
@@ -67,24 +72,24 @@ function renderState() {
   document.querySelectorAll("[data-building]").forEach((button) => {
     const active = button.dataset.building === activeId;
     const viewed = button.dataset.building === viewedId;
-    const unwired = buildings.find((item) => item.id === button.dataset.building)?.pin === null;
+    const note = ledNote(buildings.find((item) => item.id === button.dataset.building));
     button.classList.toggle("active", active);
     button.classList.toggle("viewed", viewed && !active);
     if (button.getAttribute("aria-pressed") !== String(viewed || active)) {
       button.setAttribute("aria-pressed", String(viewed || active));
     }
     const label = button.querySelector(".building-state");
-    if (label) setText(label, active ? (simulation ? "模擬点灯" : "点灯中") : unwired ? "配線未確認" : viewed ? "選択中" : "↗");
+    if (label) setText(label, active ? (simulation ? "模擬点灯" : "点灯中") : note || (viewed ? "選択中" : "↗"));
   });
   const building = buildings.find((item) => item.id === (viewedId || activeId));
   setText($("destination-symbol"), building ? building.id : "↗");
   setText($("destination-name"), building ? building.name : "行き先を選んでください");
   setText($("destination-detail"), building
-    ? `地図記号 ${building.id} · ${building.name}　${building.pin === null ? "配線未確認のため、実機LEDの点灯は保留しています。" : "教室の詳細配置は確認中です。"}`
+    ? `地図記号 ${building.id} · ${building.name}　${building.pin === null ? `${ledNote(building)}のため、実機LEDは使用できません。` : building.led_note ? `${building.led_note}。実配線は確認してください。` : "教室の詳細配置は確認中です。"}`
     : "一覧または地図の記号から選択できます。");
   const indicator = $("led-indicator");
   indicator.classList.toggle("on", on && building?.id === activeId);
-  setText(indicator, !simulation && building?.pin === null ? "配線未確認"
+  setText(indicator, !simulation && building?.pin === null ? ledNote(building)
     : state.led_state === "unknown" ? "LED状態不明"
     : on && building?.id === activeId ? (simulation ? "模擬点灯中" : "LED点灯中")
       : on ? "別の施設が点灯中" : "全消灯");
@@ -92,7 +97,7 @@ function renderState() {
   setText($("led-summary"), state.led_state === "unknown"
     ? "物理LEDの状態は不明です。接続後に確認します。"
     : on ? `${active?.name || activeId} ${simulation ? "を画面上で点灯しています。" : "の点灯応答を確認しました。"}`
-      : simulation ? "画面上のLEDはすべて消灯しています。" : "対応する5施設の全消灯応答を確認しました。");
+      : simulation ? "画面上のLEDはすべて消灯しています。" : `対応する${wiredCount}施設の全消灯応答を確認しました。`);
   setText($("port-detail"), state.connected ? `接続先：${state.port} / 9600bps` : "ポートを選んで再接続できます。互換機は手動で選択してください。");
   document.querySelectorAll("[data-control]").forEach((control) => { control.disabled = busy; });
   ["serial-port", "refresh-ports", "reconnect"].forEach((id) => { $(id).disabled = busy || simulation; });
@@ -129,7 +134,7 @@ function selectBuilding(id) {
   renderState();
   const building = buildings.find((item) => item.id === id);
   if (state?.mode === "real" && building?.pin === null) {
-    showMessage("error", `${building.name}は配線未確認です。施設情報のみ表示し、点灯命令は送信しません。`);
+    showMessage("error", `${building.name}は${ledNote(building)}です。施設情報のみ表示し、点灯命令は送信しません。`);
     return;
   }
   return action(async () => { state = (await api("/api/select", { building_id: id })).status; });
@@ -145,7 +150,7 @@ function renderList(items) {
     button.className = "building-button";
     button.dataset.building = building.id;
     button.dataset.control = "";
-    button.setAttribute("aria-label", `${building.id} ${building.name}を選択${building.pin === null ? "（実機の配線は未確認）" : "してLEDで案内"}`);
+    button.setAttribute("aria-label", `${building.id} ${building.name}を選択${building.pin === null ? `（${ledNote(building)}）` : "してLEDで案内"}`);
     const symbol = document.createElement("span");
     symbol.className = "building-symbol";
     symbol.textContent = building.id;
@@ -208,8 +213,8 @@ async function loadMap() {
     button.dataset.control = "";
     button.style.left = `${marker.x}%`;
     button.style.top = `${marker.y}%`;
-    button.title = building.name + (building.pin === null ? "（配線未確認）" : "");
-    button.setAttribute("aria-label", `地図の${marker.id} ${building.name}を選択${building.pin === null ? "（実機の配線は未確認）" : "してLEDで案内"}`);
+    button.title = building.name + (building.pin === null ? `（${ledNote(building)}）` : "");
+    button.setAttribute("aria-label", `地図の${marker.id} ${building.name}を選択${building.pin === null ? `（${ledNote(building)}）` : "してLEDで案内"}`);
     button.addEventListener("click", () => selectBuilding(marker.id));
     $("markers").append(button);
   });
