@@ -34,11 +34,17 @@ for line in sys.stdin:
   const requests = [];
   createInterface({input:bridge.stdout}).on('line', line => {
     const value = JSON.parse(line);
-    pending.get(value.id)?.(value);
+    pending.get(value.id)?.resolve(value);
     pending.delete(value.id);
   });
   let stderr = '';
   bridge.stderr.on('data', chunk => { stderr += chunk; });
+  const failPending = error => {
+    for (const task of pending.values()) task.reject(error);
+    pending.clear();
+  };
+  bridge.on('error', failPending);
+  bridge.on('exit', code => failPending(new Error(`Flask検証プロセスが終了しました (${code}): ${stderr}`)));
   const dom = new JSDOM(readFileSync(path.join(root,'frontend/index.html'),'utf8'), {
     url:'http://localhost/', runScripts:'outside-only',
   });
@@ -49,9 +55,18 @@ for line in sys.stdin:
     const request = {id:++sequence, path:requestPath, method:options.method};
     if (options.body) request.body = JSON.parse(options.body);
     requests.push(request);
-    const response = await new Promise(resolve => {
-      pending.set(request.id, resolve);
-      bridge.stdin.write(JSON.stringify(request)+'\n');
+    const response = await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        pending.delete(request.id);
+        reject(new Error(`Flask検証APIが応答しません: ${requestPath}`));
+      }, 8000);
+      pending.set(request.id, {
+        resolve: value => { clearTimeout(timer); resolve(value); },
+        reject: error => { clearTimeout(timer); reject(error); },
+      });
+      bridge.stdin.write(JSON.stringify(request)+'\n', error => {
+        if (error) pending.get(request.id)?.reject(error);
+      });
     });
     return {ok:response.ok, json:async () => response.body};
   };

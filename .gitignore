@@ -7,6 +7,7 @@ __pycache__/
 htmlcov/
 .pio/
 node_modules/
+validation-results/
 .env
 .env.*
 !.env.example

@@ -242,6 +242,10 @@ Node.jsは`tests/package.json`のenginesを満たす版を使用します。Pyth
 
 確認できた範囲と、実機・OSごとの未確認項目は[検証記録](docs/VALIDATION.md)にまとめています。実際のLED、USB切断・再接続、Windowsの起動は、展示用機材で受入確認してください。
 
+## Mac / Windowsの検証
+
+OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。Windowsの実行はGitHub認証の`workflow`権限不足でまだ開始できていません。
+
 ## 困ったとき
 
 | 症状 | 確認すること |

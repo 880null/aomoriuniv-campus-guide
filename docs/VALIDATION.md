@@ -219,3 +219,8 @@ Flash: 2458 / 32256 bytes
 - ピン・USB通信契約・ファームウェアは変更していない。D7はレストラン棟の仮設定、7号館はD6のまま。
 
 転記の範囲と未記載箇所は[ROOM_DATA.md](ROOM_DATA.md)を参照。
+
+
+## Mac / Windowsの検証追加（2026-11-02）
+
+Mac実環境でOS起動ファイル、初回準備、日本語・空白入りパス、実HTTP、Chromium／WebKitの画面操作、未接続、オフライン再起動、終了を検査し成功した。Windows用CIは作成したが、GitHub認証のworkflow権限不足で未実行。詳細と確認限界は[PLATFORM_VALIDATION.md](PLATFORM_VALIDATION.md)、Macの結果は[JSON](platform-results/macos-arm64-2026-11-02.json)を参照。
