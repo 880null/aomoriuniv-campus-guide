@@ -153,7 +153,15 @@ cd firmware
 pio run
 ```
 
-Pythonテストは41件。ファームウェアの論理テストはC++コンパイラ（clang++またはg++）があると実行され、ない場合はその1件だけスキップします。論理テストでは実際の`main.cpp`を模擬Arduino上で動かします。Node.jsはJavaScriptの構文確認だけに使用します。
+Pythonテストは55件です。ファームウェアの論理テスト1件にはC++コンパイラ（clang++またはg++）が必要です。シリアル結合テスト10件には、さらにmacOS/LinuxのPOSIX仮想ポートが必要です。条件を満たさないテストはスキップします。Node.jsはJavaScriptの構文確認だけに使用します。
+
+結合テストでは`Flask API → 実際のpySerial → OSの仮想シリアルポート → 実際のmain.cpp → 模擬ピン出力`をつなぎ、7施設の点灯・消灯、連続選択、切断・再接続、通信停止時の自動消灯を確認します。`Serial`・時計・GPIOは検証用の代替実装です。USB回路、UnoのDTR自動リセット、配線、LEDの実際の点灯を保証するものではありません。
+
+結合テストだけを実行する場合:
+
+```sh
+.venv/bin/python -m unittest discover -s tests -p test_serial_integration.py -v
+```
 
 確認できた範囲と、実機・OSごとの未確認項目は[検証記録](docs/VALIDATION.md)にまとめています。実際のLED、USB切断・再接続、Windowsの起動は、展示用機材で受入確認してください。
 

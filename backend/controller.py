@@ -72,6 +72,25 @@ class LedController:
         except UnicodeDecodeError as exc:
             raise ControllerError("ArduinoからASCII以外の応答を受信しました。") from exc
 
+    def _wait_for_ready(self):
+        # read_untilは途中でタイムアウトすると部分行を返すため、起動待ちの間は保持する。
+        pending = bytearray()
+        overlong = False
+        deadline = time.monotonic() + 4
+        while time.monotonic() < deadline:
+            chunk = self._serial.read_until(b"\n", size=64)
+            if len(pending) + len(chunk) > 64:
+                overlong = True
+            if not overlong:
+                pending.extend(chunk)
+            if chunk.endswith(b"\n"):
+                if not overlong and pending in (b"READY:CAMPUS:1\n", b"READY:CAMPUS:1\r\n"):
+                    return
+                # 長すぎる行はLFまで破棄する。途中の識別子だけを受理しない。
+                pending.clear()
+                overlong = False
+        self._fail("ファームウェアの起動通知を確認できません。書き込み・9600bps・RESETを確認してください。")
+
     def _exchange(self, command):
         if self._serial is None or not self._serial.is_open:
             self._fail("Arduinoが未接続です。USB接続とポートを確認し、再接続してください。")
@@ -95,9 +114,13 @@ class LedController:
         with self._lock:
             if self.mode != "real":
                 raise ControllerError("シミュレーション中はUSB接続しません。実機モードへ切り替えてください。")
-            # 再接続時も既存接続を消灯してから閉じる。
+            # 古い接続が切れていても、1回の再接続操作で新しい接続の試行まで進める。
+            previous_off_failed = False
             if self._serial is not None:
-                self._exchange("0")
+                try:
+                    self._exchange("0")
+                except ControllerError:
+                    previous_off_failed = True
             self._drop()
             self._error = None
             self._notice = None
@@ -116,15 +139,11 @@ class LedController:
                     port=chosen, baudrate=9600, timeout=0.2, write_timeout=1)
                 self._port = chosen
                 # Unoはポートを開くとリセットされる。識別子を待って別機器への送信を防ぐ。
-                deadline = time.monotonic() + 4
-                while time.monotonic() < deadline:
-                    raw = self._serial.read_until(b"\n", size=64)
-                    if raw == b"READY:CAMPUS:1\n" or raw == b"READY:CAMPUS:1\r\n":
-                        break
-                else:
-                    self._fail("ファームウェアの起動通知を確認できません。書き込み・9600bps・RESETを確認してください。")
+                self._wait_for_ready()
                 self._serial.timeout = 1
                 self._exchange("0")
+                if previous_off_failed:
+                    self._notice = "以前の接続では消灯を確認できませんでした。現在の接続先は初期化済みです。"
                 return self.snapshot()
             except (OSError, serial.SerialException, ControllerError) as exc:
                 self._fail(str(exc))

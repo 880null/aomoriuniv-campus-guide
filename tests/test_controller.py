@@ -169,6 +169,42 @@ class ControllerTests(unittest.TestCase):
             self.controller.select("A")
         self.assertEqual(self.controller.connect()["led_state"], "off")
 
+    def test_reconnect_recovers_stale_connection_in_one_attempt(self):
+        device = self.connected()
+        self.controller.select("A")
+        device.write_failure = True
+        # 定期照会が切断を検知する前に再接続しても、1回で新しい接続へ進む。
+        state = self.controller.connect()
+        self.assertTrue(state["connected"])
+        self.assertEqual(state["led_state"], "off")
+        self.assertIsNot(self.controller._serial, device)
+
+    def test_fragmented_boot_notification_is_reassembled(self):
+        device = FakeSerial(timeout=0.2)
+        device.responses = [b"READY:CAMP", b"US:1\r\n"]
+        self.factory.side_effect = None
+        self.factory.return_value = device
+        with unittest.mock.patch("backend.controller.time.monotonic", side_effect=range(8)):
+            self.assertTrue(self.controller.connect()["connected"])
+
+    def test_overlong_boot_line_cannot_hide_a_valid_suffix(self):
+        device = FakeSerial(timeout=0.2)
+        device.responses = [b"x" * 64, b"READY:CAMPUS:1\n"]
+        self.factory.side_effect = None
+        self.factory.return_value = device
+        with unittest.mock.patch("backend.controller.time.monotonic", side_effect=range(8)):
+            with self.assertRaisesRegex(ControllerError, "起動通知"):
+                self.controller.connect()
+        self.assertEqual(device.commands, [])
+
+    def test_valid_boot_line_after_oversized_noise_is_accepted(self):
+        device = FakeSerial(timeout=0.2)
+        device.responses = [b"x" * 64, b"noise\n", b"READY:CAMPUS:1\r\n"]
+        self.factory.side_effect = None
+        self.factory.return_value = device
+        with unittest.mock.patch("backend.controller.time.monotonic", side_effect=range(8)):
+            self.assertTrue(self.controller.connect()["connected"])
+
     def test_wrong_firmware_handshake_is_rejected(self):
         device = FakeSerial(timeout=0.2)
         device.responses = [b"READY:OTHER\n"]
