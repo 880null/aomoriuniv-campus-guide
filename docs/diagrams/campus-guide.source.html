@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ja"><!-- set lang to the label language, e.g. "ja" for Japanese labels -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>青森大学キャンパスガイド｜技術と仕組み</title>
+<style>
+/* engineered-paper theme (cool near-white, one accent, mono labels)
+ * All colors/fonts flow through the :root tokens — tweak tokens, not scattered values. */
+:root {
+  color-scheme: light;
+  --color-paper:   oklch(98.5% 0.004 250);
+  --color-paper-2: oklch(96.5% 0.005 252);
+  --color-rule:    oklch(93% 0.007 255);    /* graph-paper grid */
+  --color-rule-2:  oklch(83% 0.011 255);    /* hairline borders */
+  --color-muted:   oklch(56% 0.013 255);
+  --color-neutral: oklch(46% 0.015 255);    /* neutral edges */
+  --color-ink-2:   oklch(34% 0.018 257);
+  --color-ink:     oklch(24% 0.020 258);
+  --color-accent:  oklch(58% 0.20 256);     /* primary-flow edges, one signal color */
+  --color-graphite:oklch(24% 0.018 260);    /* dark tile for white/light logos */
+  /* group palette A — warm vendor (e.g. Cloudflare/AWS orange). Retune hue per vendor. */
+  --color-g1:      oklch(68% 0.15 55);
+  --color-g1-soft: oklch(78% 0.12 55);
+  --color-g1-ink:  oklch(52% 0.14 50);
+  --color-g1-tint: oklch(96.5% 0.015 60 / .5);
+  /* group palette B — accent-family (repo/tooling groups) */
+  --color-accent-soft: oklch(58% 0.20 256 / .45);
+  --color-accent-tint: oklch(97% 0.012 256 / .5);
+  /* JP glyphs: name JP faces explicitly — bare sans-serif fallback on Linux picks Chinese-variant CJK */
+  --font-display: "Geist", "Hiragino Sans", "Yu Gothic UI", "Noto Sans CJK JP", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Hiragino Sans", "Yu Gothic UI", "Noto Sans CJK JP", "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --space-xs: 4px; --space-sm: 8px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px;
+  --radius-card: 10px; --radius-tile: 8px;
+  /* translucent veil behind node label text: matches paper on plain canvas, blends into
+     group tints instead of punching an off-color rectangle through them */
+  --color-veil: oklch(98.5% 0.004 250 / .78);
+}
+/* Dark variant: set data-theme="dark" on <html>. Tiles stay white — brand logos are drawn
+   for light grounds. Everything (arrowheads via context-stroke, legend via border-color)
+   follows the tokens, so toggling the attribute is all it takes. */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper:   oklch(18% 0.012 255);
+  --color-paper-2: oklch(22% 0.014 255);
+  --color-rule:    oklch(24% 0.013 255);
+  --color-rule-2:  oklch(38% 0.018 255);
+  --color-muted:   oklch(65% 0.014 255);
+  --color-neutral: oklch(72% 0.012 255);
+  --color-ink-2:   oklch(85% 0.010 255);
+  --color-ink:     oklch(94% 0.008 255);
+  --color-accent:  oklch(70% 0.16 256);
+  --color-graphite:oklch(31% 0.020 260);
+  --color-g1:      oklch(70% 0.14 55);
+  --color-g1-soft: oklch(58% 0.11 55);
+  --color-g1-ink:  oklch(78% 0.12 55);
+  --color-g1-tint: oklch(26% 0.030 60 / .40);
+  --color-accent-soft: oklch(70% 0.16 256 / .5);
+  --color-accent-tint: oklch(28% 0.045 256 / .35);
+  --color-veil: oklch(18% 0.012 255 / .78);
+}
+@font-face { font-family:"Geist"; font-style:normal; font-weight:100 900; font-display:swap;
+  src:url(data:font/woff2;base64,%%FONT_DISPLAY%%) format("woff2"); }
+@font-face { font-family:"JetBrains Mono"; font-style:normal; font-weight:100 800; font-display:swap;
+  src:url(data:font/woff2;base64,%%FONT_JBM%%) format("woff2"); }
+/* JetBrains Mono reads cramped at 9.5–11px; open every mono label slightly */
+.kicker, .node .role, .el, .legend, .foot { letter-spacing: 0.04em; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { overflow-x: clip; }
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); padding: var(--space-xl) var(--space-lg) var(--space-2xl); }
+.page { width: fit-content; max-width: 100%; margin: 0 auto; }
+
+.head { display:grid; grid-template-columns: 1fr auto; gap: var(--space-lg); align-items:end;
+  padding-bottom: var(--space-md); border-bottom: 1px solid var(--color-rule-2); margin-bottom: var(--space-lg); }
+.kicker { font-family: var(--font-mono); font-size: 11px;
+  color: var(--color-accent); margin-bottom: var(--space-sm); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 4vw, 30px);
+  letter-spacing: -0.005em; line-height: 1.2; }
+.lede { max-width: 300px; font-size: 12px; line-height: 1.7; color: var(--color-neutral); padding-bottom: 2px; }
+@media (max-width: 680px) { .head { grid-template-columns: 1fr; align-items:start; } .lede { max-width:none; } }
+
+.scroller { overflow-x: auto; border: 1px solid var(--color-rule-2); border-radius: var(--radius-card); }
+/* CANVAS SIZE: set width/height here AND on svg.edges AND its viewBox — keep the three in sync */
+.canvas { position: relative; width: 1120px; height: 1210px; background: var(--color-paper);
+  background-image:
+    linear-gradient(var(--color-rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-rule) 1px, transparent 1px);
+  background-size: 24px 24px; background-position: -1px -1px; }
+
+.group { position:absolute; border-radius: var(--radius-tile); }
+/* group labels are names like node names (display font), written in the brand's own case.
+   They sit inside the top-left corner, so the border stays unbroken and needs no mask */
+.g-label { position:absolute; top:12px; left:12px; display:flex; align-items:center; gap:6px;
+  font-family: var(--font-display); font-size: 12px; font-weight: 600;
+  color: var(--color-neutral); white-space: nowrap; }
+.g-label img { width: 14px; height: 14px; }
+/* group labels sit on the group's tint, not on a white tile: in the dark theme swap in the brand's own
+   dark-theme logo (lt/dk pair), or give a mark with black parts a white plate */
+.g-label img.dk, .tile img.dk { display:none; }
+[data-theme="dark"] .g-label img.lt, [data-theme="dark"] .tile img.lt { display:none; }
+[data-theme="dark"] .g-label img.dk, [data-theme="dark"] .tile img.dk { display:block; }
+[data-theme="dark"] .g-label img.plate { background:#fff; border-radius:3px; padding:2px; width:18px; height:18px; }
+.group.ga { border:1.5px solid var(--color-g1); background: var(--color-g1-tint); }
+.group.ga-nested { border:1.5px dashed var(--color-g1-soft); }
+.group.gb { border:1.5px solid var(--color-accent-soft); background: var(--color-accent-tint); }
+.group.ga > .g-label, .group.ga-nested > .g-label { color: var(--color-g1-ink); }
+.group.gb > .g-label { color: var(--color-accent); }
+.group.aws { border:1.5px solid var(--color-ink); border-radius:0; }
+.group.aws > .g-label { top:-1.5px; left:-1.5px; gap:8px; color: var(--color-ink); }
+.group.aws > .g-label img { width:30px; height:30px; }
+.group.aws.az > .g-label { top:8px; left:12px; }
+.group.aws.region, .group.aws.az { border-color:#00A4A6; border-style:dashed; }
+.group.aws.vpc { border-color:#8C4FFF; }
+.group.aws.private { border-color:#00A4A6; }
+.group.aws.public { border-color:#7AA116; }
+
+.node { position:absolute; width:132px; text-align:center; }
+.tile { width:60px; height:60px; margin:0 auto; border-radius: var(--radius-tile);
+  background:#fff; border:1px solid var(--color-rule-2); display:grid; place-items:center;
+  box-shadow: 0 1px 2px oklch(24% 0.02 258 / 0.05); transition: border-color .15s cubic-bezier(0.16,1,0.3,1); }
+.node:hover .tile { border-color: var(--color-accent); }
+.tile img { width:34px; height:34px; object-fit:contain; }
+.tile.wide img { width:44px; }                       /* wide-aspect logos */
+.tile.dark { background: var(--color-graphite); border-color: var(--color-graphite); }  /* white/light logos */
+.tile.bare { background:none; border:none; box-shadow:none; }
+.tile.bare img { width:60px; height:60px; }
+.tile.bare.res img { width:44px; height:44px; }
+.node .name { font-family: var(--font-display); font-weight:600; font-size:13px; margin-top: var(--space-sm); letter-spacing:0; }
+.node .role { font-family: var(--font-mono); font-size:9.5px; color: var(--color-muted); margin-top:2px; }
+/* veil behind label spans: crossing edges/grid fade behind text; translucent so it
+   blends into group tints (a solid paper rectangle looks pasted-on inside tinted groups) */
+.node .name span, .node .role span { background: var(--color-veil); backdrop-filter: blur(1.5px);
+  padding: 0 var(--space-xs); border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+svg.edges { position:absolute; inset:0; width:1120px; height:1210px; pointer-events:none; }
+.e  { stroke: var(--color-accent); stroke-width:1.6; fill:none; }   /* primary flow */
+.n  { stroke: var(--color-neutral); stroke-width:1.4; fill:none; }  /* internal */
+path.aws { stroke: var(--color-ink); stroke-width:1.6; fill:none; }
+.dash { stroke-dasharray:4 5; }                                     /* dev / deploy */
+.el { font-family: var(--font-mono); font-size:10.5px; fill: var(--color-neutral);
+  paint-order: stroke; stroke: var(--color-paper); stroke-width:4px; stroke-linejoin:round; }  /* halo */
+.el.a { fill: var(--color-accent); }
+
+.legend { display:flex; gap: var(--space-lg); align-items:center; margin-top: var(--space-md);
+  font-family: var(--font-mono); font-size:10px; color: var(--color-muted); flex-wrap:wrap; }
+.legend .sw { display:inline-block; width:30px; vertical-align:middle; margin-right:6px;
+  border-top:1.6px solid var(--color-accent); }
+.legend .sw.n { border-color: var(--color-neutral); border-top-width:1.4px; }
+.legend .sw.dash { border-top-style: dashed; }
+
+.foot { margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--color-rule-2);
+  display:flex; justify-content:space-between; gap: var(--space-md); flex-wrap:wrap;
+  font-family: var(--font-mono); font-size:10px; color: var(--color-muted); }
+.foot a { color: inherit; text-decoration-color: var(--color-rule-2); text-underline-offset: 2px; }
+.foot a:hover { color: var(--color-accent); }
+
+/* この図の寸法・日本語ラベル。アプリ本体の画面には適用しない。 */
+.node .name { font-size:14px; }
+.node .role { font-size:11px; font-family:var(--font-body); line-height:1.5; }
+.canvas-title { position:absolute; top:18px; left:40px; font:700 23px var(--font-display); }
+.canvas-subtitle { position:absolute; top:51px; left:40px; font:12px var(--font-body); color:var(--color-neutral); }
+.canvas .legend { position:absolute; left:40px; bottom:20px; font:11px var(--font-body); }
+.summary { max-width:1050px; padding-top:24px; font:14px/1.9 var(--font-body); color:var(--color-neutral); }
+.summary strong { color:var(--color-ink); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="head">
+    <div>
+      <div class="kicker">AOMORI UNIVERSITY / SYSTEM ARCHITECTURE</div>
+      <h1>青森大学キャンパスガイド｜技術と仕組み</h1>
+    </div>
+    <p class="lede">Web画面で目的地を選び、PythonがArduinoへ点灯命令を送ります。すべて展示PCとUSB接続の模型で動作します。</p>
+  </header>
+
+  <div class="scroller">
+  <div class="canvas">
+
+<h2 class="canvas-title">青森大学キャンパスガイドのしくみ</h2>
+<p class="canvas-subtitle">目的地を選択 → 建物を判定 → USBシリアル通信 → 対応LEDを1個だけ点灯</p>
+<div class="group gb" style="left:40px;top:80px;width:810px;height:785px"><div class="g-label">展示用PC（Windows / Mac）</div></div>
+<div class="group ga-nested" style="left:70px;top:130px;width:750px;height:210px"><div class="g-label"><img class="plate" src="%%ICON_browser%%" alt="">Webブラウザ｜画面・検索・地図</div></div>
+<div class="group ga-nested" style="left:70px;top:375px;width:750px;height:455px"><div class="g-label"><img class="plate" src="%%ICON_python%%" alt="">Pythonバックエンド｜127.0.0.1:5050</div></div>
+<div class="group ga" style="left:900px;top:375px;width:200px;height:490px"><div class="g-label"><img class="plate" src="%%ICON_arduino%%" alt="">Arduino・実物模型</div></div>
+<div class="group gb" style="left:40px;top:920px;width:1060px;height:200px"><div class="g-label">開発・書き込み・ソース管理（日常起動には不要）</div></div>
+<svg class="edges" viewBox="0 0 1120 1210" aria-hidden="true">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="context-stroke"/></marker></defs>
+<!-- 検索リクエストはWaitressが受け、FlaskのAPIへ渡す。 -->
+<path class="e" d="M720 300 V365 H55 V460 H164" marker-end="url(#ar)"/>
+<text class="el a" x="450" y="357" text-anchor="middle">Fetch / HTTP (JSON)</text>
+<path class="e" d="M236 460 H434" marker-end="url(#ar)"/>
+<text class="el a" x="335" y="452" text-anchor="middle">WSGI</text>
+<path class="e" d="M506 460 H684" marker-end="url(#ar)"/>
+<text class="el a" x="595" y="452" text-anchor="middle">LED command</text>
+<path class="e" d="M756 460 H964" marker-end="url(#ar)"/>
+<text class="el a" x="860" y="452" text-anchor="middle">USB / 9600bps</text>
+<path class="e" d="M1000 540 V674" marker-end="url(#ar)"/>
+<text class="el a" x="1010" y="610">D2–D7</text>
+<!-- 同梱データの参照と、USBへ送信しないシミュレーションの分岐。 -->
+<path class="n" d="M200 674 V600 H450 V540" marker-end="url(#ar)"/>
+<text class="el" x="320" y="592" text-anchor="middle">PNG / PDF</text>
+<path class="n" d="M720 674 V600 H490 V540" marker-end="url(#ar)"/>
+<text class="el" x="620" y="592" text-anchor="middle">JSON</text>
+<path class="n" d="M470 540 V674" marker-end="url(#ar)"/>
+<text class="el" x="480" y="650">USB送信なし</text>
+<!-- PlatformIOとArduino IDEは、どちらかを選んで同じC++実装を書き込む。 -->
+<path class="n dash" d="M300 1090 V1140 H470"/>
+<path class="n dash" d="M470 1090 V1140 H1110 V460 H1036" marker-end="url(#ar)"/>
+<text class="el" x="800" y="1132" text-anchor="middle">ビルド・USB書込（初回／更新時）</text>
+<path class="n dash" d="M846 1010 H944" marker-end="url(#ar)"/>
+<text class="el" x="895" y="1002" text-anchor="middle">push</text>
+</svg>
+<div class="node" style="left:134px;top:190px"><div class="tile"><img src="%%ICON_html5%%" alt=""></div><div class="name"><span>HTML5</span></div><div class="role"><span>画面の構造</span></div></div>
+<div class="node" style="left:404px;top:190px"><div class="tile"><img src="%%ICON_css3%%" alt=""></div><div class="name"><span>CSS3</span></div><div class="role"><span>配色・配置の調整</span></div></div>
+<div class="node" style="left:654px;top:190px"><div class="tile"><img src="%%ICON_javascript%%" alt=""></div><div class="name"><span>JavaScript</span></div><div class="role"><span>検索操作・Fetch API</span></div></div>
+<div class="node" style="left:134px;top:430px"><div class="tile"><img src="%%ICON_server%%" alt=""></div><div class="name"><span>Waitress</span></div><div class="role"><span>ローカルHTTP / WSGI</span></div></div>
+<div class="node" style="left:404px;top:430px"><div class="tile"><img src="%%ICON_flask%%" alt=""></div><div class="name"><span>Flask</span></div><div class="role"><span>教室検索・LED制御API</span></div></div>
+<div class="node" style="left:654px;top:430px"><div class="tile"><img src="%%ICON_serial%%" alt=""></div><div class="name"><span>pySerial</span></div><div class="role"><span>USB通信・ACK確認</span></div></div>
+<div class="node" style="left:134px;top:680px"><div class="tile"><img src="%%ICON_assets%%" alt=""></div><div class="name"><span>地図・案内図</span></div><div class="role"><span>同梱PNG・PDFの配信</span></div></div>
+<div class="node" style="left:404px;top:680px"><div class="tile"><img src="%%ICON_simulation%%" alt=""></div><div class="name"><span>シミュレーション</span></div><div class="role"><span>画面上で点灯を確認</span></div></div>
+<div class="node" style="left:654px;top:680px"><div class="tile"><img src="%%ICON_data%%" alt=""></div><div class="name"><span>JSONデータ</span></div><div class="role"><span>施設・教室・地図</span></div></div>
+<div class="node" style="left:934px;top:430px"><div class="tile"><img src="%%ICON_arduino%%" alt=""></div><div class="name"><span>Arduino Uno R3</span></div><div class="role"><span>Arduino / C++</span></div></div>
+<div class="node" style="left:934px;top:680px"><div class="tile"><img src="%%ICON_led%%" alt=""></div><div class="name"><span>建物LED ×6</span></div><div class="role"><span>選択した1施設のみ点灯</span></div></div>
+<div class="node" style="left:64px;top:980px"><div class="tile"><img src="%%ICON_vscode%%" alt=""></div><div class="name"><span>VS Code</span></div><div class="role"><span>編集・開発</span></div></div>
+<div class="node" style="left:234px;top:980px"><div class="tile"><img src="%%ICON_platformio%%" alt=""></div><div class="name"><span>PlatformIO</span></div><div class="role"><span>ビルド・書込の選択肢</span></div></div>
+<div class="node" style="left:404px;top:980px"><div class="tile"><img src="%%ICON_arduino%%" alt=""></div><div class="name"><span>Arduino IDE</span></div><div class="role"><span>ビルド・書込の選択肢</span></div></div>
+<div class="node" style="left:574px;top:980px"><div class="tile"><img src="%%ICON_cplusplus%%" alt=""></div><div class="name"><span>C++</span></div><div class="role"><span>Unoファームウェア</span></div></div>
+<div class="node" style="left:744px;top:980px"><div class="tile"><img src="%%ICON_git%%" alt=""></div><div class="name"><span>Git</span></div><div class="role"><span>変更履歴の管理</span></div></div>
+<div class="node" style="left:914px;top:980px"><div class="tile"><img src="%%ICON_github%%" alt=""></div><div class="name"><span>GitHub</span></div><div class="role"><span>ソースコードの共有</span></div></div>
+<div class="legend"><span><span class="sw"></span>利用時の通信</span><span><span class="sw n"></span>データ参照・模擬動作</span><span><span class="sw n dash"></span>開発・書込・履歴管理</span></div>
+  </div>
+  </div>
+
+  <div class="summary"><strong>例：</strong>5301を検索すると、確認済みJSONから5号館・3階と判定します。5号館を選ぶとPythonが<code>D\n</code>を送り、UnoはD4のLEDを点灯して<code>OK:D\n</code>を返します。シミュレーションではUSBへ送信しません。4号館などLEDのない施設は画面で案内します。</div>
+
+  <div class="foot">
+    <span>青森大学 プログラミングワークショップⅡ · ローカルUSB展示用</span>
+    <span>icons: svgl / devicon / gilbarbara/logos / Lucide · ブランドの商標は各権利者に帰属 · made with <a href="https://github.com/caru-ini/stack-diagram" target="_blank" rel="noopener">stack-diagram</a></span>
+  </div>
+
+</div>
+</body>
+</html>

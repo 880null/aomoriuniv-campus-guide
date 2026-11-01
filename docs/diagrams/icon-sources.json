@@ -1,0 +1,112 @@
+{
+  "html5": {
+    "source": "svgl",
+    "url": "https://svgl.app/library/html5.svg",
+    "file": "html5.svg",
+    "bytes": 382
+  },
+  "css3": {
+    "source": "devicon",
+    "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg",
+    "file": "css3.svg",
+    "bytes": 778
+  },
+  "javascript": {
+    "source": "svgl",
+    "url": "https://svgl.app/library/javascript.svg",
+    "file": "javascript.svg",
+    "bytes": 1068
+  },
+  "python": {
+    "source": "svgl",
+    "url": "https://svgl.app/library/python.svg",
+    "file": "python.svg",
+    "bytes": 1126
+  },
+  "flask": {
+    "source": "svgl",
+    "url": "https://svgl.app/library/flask-light.svg",
+    "file": "flask.svg",
+    "bytes": 12348,
+    "dark_file": "flask_dark.svg"
+  },
+  "arduino": {
+    "source": "devicon",
+    "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/arduino/arduino-original.svg",
+    "file": "arduino.svg",
+    "bytes": 2451
+  },
+  "cplusplus": {
+    "source": "devicon",
+    "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg",
+    "file": "cplusplus.svg",
+    "bytes": 1143
+  },
+  "platformio": {
+    "source": "gilbarbara",
+    "url": "https://cdn.jsdelivr.net/gh/gilbarbara/logos/logos/platformio.svg",
+    "file": "platformio.svg",
+    "bytes": 3088
+  },
+  "vscode": {
+    "source": "devicon",
+    "url": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg",
+    "file": "vscode.svg",
+    "bytes": 3404
+  },
+  "git": {
+    "source": "svgl",
+    "url": "https://svgl.app/library/git.svg",
+    "file": "git.svg",
+    "bytes": 484
+  },
+  "github": {
+    "source": "svgl",
+    "url": "https://svgl.app/library/github_light.svg",
+    "file": "github.svg",
+    "bytes": 997,
+    "dark_file": "github_dark.svg"
+  },
+  "serial": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/usb.svg",
+    "file": "serial.svg",
+    "bytes": 511
+  },
+  "data": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/file-json.svg",
+    "file": "data.svg",
+    "bytes": 616
+  },
+  "assets": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/files.svg",
+    "file": "assets.svg",
+    "bytes": 517
+  },
+  "simulation": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/monitor-play.svg",
+    "file": "simulation.svg",
+    "bytes": 506
+  },
+  "led": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/lightbulb.svg",
+    "file": "led.svg",
+    "bytes": 448
+  },
+  "server": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/server.svg",
+    "file": "server.svg",
+    "bytes": 487
+  },
+  "browser": {
+    "source": "lucide",
+    "url": "https://cdn.jsdelivr.net/npm/lucide-static/icons/app-window.svg",
+    "file": "browser.svg",
+    "bytes": 407
+  }
+}

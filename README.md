@@ -12,6 +12,49 @@
 
 **公式アクセスページの全11案内図・15ページを確認し、369地点を登録しています（2026-11-01）。** 例：`5301`、`保健室`、`学修支援センター`、`5号館 トイレ`。建物を選ぶと階別の教室・施設一覧も表示します。棟や階が図面に明記されていない箇所は未記載と表示し、未登録番号は推測で案内しません。資料との照合であり、現地の配置確認は未実施です。[転記範囲と出典](docs/ROOM_DATA.md)を参照してください。
 
+## 使用技術と全体構成
+
+ブラウザで目的地を選び、展示用PCのPythonがUSB経由でArduinoへ命令を送り、キャンパス模型のLEDを点灯させます。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/campus-guide-dark.png">
+  <img src="docs/diagrams/campus-guide.png" alt="キャンパスガイドの構成図。HTML・CSS・JavaScriptのブラウザ画面からFetchでWaitressとFlaskへ接続し、pySerialがUSBでArduino Uno R3へ命令を送り、建物LEDを点灯する。JSONと地図・PDFをPC内に保持し、シミュレーションではUSBへ送信しない。開発にはVS Code、PlatformIOまたはArduino IDE、C++、Git、GitHubを使う。" width="1120">
+</picture>
+
+青線は利用時の通信、灰色の実線はデータ参照・模擬動作、点線は開発・書き込みの関係です。LEDは現在の設定上6施設で、レストラン棟のD7は仮設定です。
+
+図は[stack-diagram](https://github.com/caru-ini/stack-diagram)で作成しています。[HTML版（保存して開く）](docs/diagrams/campus-guide.html)と[作成手順・出典](docs/diagrams/README.md)も同梱しています。HTML版は構成図を表示するファイルです。
+
+| 担当 | 使用技術 | このシステムでの役割 |
+| --- | --- | --- |
+| 画面 | HTML5 / CSS3 / JavaScript | 検索フォーム、施設一覧、キャンパスマップ、接続状態を表示する |
+| 画面とAPIの通信 | Fetch API / HTTP / JSON | ブラウザから検索・選択・消灯・状態確認をリクエストする |
+| バックエンド | Python 3 / Flask | 確認済みデータを検索し、建物を判定してLED制御を受け付ける |
+| Webサーバー | Waitress | `127.0.0.1:5050`でHTTPを受け、WSGI経由でFlaskを実行する |
+| USB通信 | pySerial | Unoとのシリアル接続、命令送信、応答確認を管理する（9600bps） |
+| 案内データ | JSON / PNG / PDF | 施設・教室・階・マーカー座標、公式地図・案内図をPC内に保存する |
+| 基板の制御 | Arduino Uno R3 / Arduino Framework / C++ | 命令を検証し、対象のLEDだけを点灯して結果を返す |
+| 編集・書き込み | VS Code / PlatformIO または Arduino IDE | PC側コードを編集し、共通のC++プログラムをUnoへ書き込む |
+| ソース管理 | Git / GitHub | 変更履歴を記録し、ソースコードと資料を共有する |
+| 開発時の検証 | Python unittest / C++の模擬Arduino / Node.js・jsdom | API・検索・通信・画面操作を自動検証する |
+
+通常利用で動作するのはブラウザ、Python、Unoのプログラムです。PlatformIO／Arduino IDEは基板への書き込み時に使い、Node.js・jsdomは開発時のテスト、stack-diagramは文書の図を作成するときだけ使います。
+
+## 検索からLED点灯までの流れ
+
+例として、`5301`を検索し、5号館を案内する場合の処理です。
+
+1. `start.command`／`start.bat`がPython環境を確認し、バックエンドとローカルWebサーバーを起動してブラウザを開きます。
+2. ブラウザのJavaScriptが、Fetch APIで`GET /api/rooms?q=5301`を送ります。WaitressがHTTPを受け、Flaskへ渡します。
+3. Flaskが確認済みJSONを検索し、「5301・コンピュータ演習室A → 5号館・3階」の情報を返します。画面には教室情報と出典を表示します。
+4. 利用者が検索結果を選ぶと、JavaScriptが`POST /api/select`に`{"building_id":"D"}`を送ります。
+5. PythonのLEDコントローラーがpySerialで`D\n`をUnoへ送ります。Unoは他のLEDを消し、5号館に対応するD4のLEDだけを点灯して`OK:D\n`を返します。
+6. Pythonが応答を確認して画面へ結果を返し、JavaScriptが地図とLED状態を更新します。応答不一致や切断時は、点灯成功と表示せずエラー・状態不明を表示します。
+
+USB接続はPythonが管理し、ブラウザからArduinoへ直接接続するWeb Serial APIは使用しません。シミュレーションの点灯操作はPython内の状態だけを更新し、USBへ送信しません。LEDのない施設は画面・案内図で案内します。
+
+**アプリは起動ファイルから開き、`http://127.0.0.1:5050/`にアクセスしてください。** `frontend/index.html`を`file://`で直接開くと、画面の部品や検索APIを正しく読み込めません。通信仕様の詳細は[システム構成・通信設計](docs/ARCHITECTURE.md)を参照してください。
+
 ## 必要な環境
 - Python 3.10以上（WindowsではPython LauncherまたはPATH設定が必要）
 - Chrome、Edge、Safari等の現在のブラウザ
@@ -178,7 +221,7 @@ cd firmware
 pio run
 ```
 
-Pythonテストは58件です。ファームウェアの論理テスト1件にはC++コンパイラ（clang++またはg++）が必要です。シリアル結合テスト11件には、さらにmacOS/LinuxのPOSIX仮想ポートが必要です。条件を満たさないテストはスキップします。Node.jsはJavaScriptの構文確認だけに使用します。
+Pythonテストは65件です。ファームウェアの論理テスト1件にはC++コンパイラ（clang++またはg++）が必要です。シリアル結合テスト11件には、さらにmacOS/LinuxのPOSIX仮想ポートが必要です。条件を満たさないテストはスキップします。Node.jsはJavaScriptの構文確認と、下記のDOM結合テストに使用します。
 
 結合テストでは`Flask API → 実際のpySerial → OSの仮想シリアルポート → 実際のmain.cpp → 模擬ピン出力`をつなぎ、設定した6施設の点灯・消灯、未実装施設の命令拒否、連続選択、切断・再接続、通信停止時の自動消灯を確認します。`Serial`・時計・GPIOは検証用の代替実装です。USB回路、UnoのDTR自動リセット、配線、LEDの実際の点灯を保証するものではありません。
 
