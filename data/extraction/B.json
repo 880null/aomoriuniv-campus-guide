@@ -1,0 +1,219 @@
+{
+  "source_id": "B",
+  "reviewed_pages": [
+    1
+  ],
+  "groups": [
+    {
+      "building_id": "B",
+      "floor": "1階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "311教室",
+          "number": "311",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "312教室",
+          "number": "312",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "第三会議室",
+          "number": null,
+          "category": "meeting",
+          "aliases": []
+        },
+        {
+          "name": "国際交流センター",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "日本語教育センター",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "学生ラウンジ",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "総合研究所",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "ピロティー",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "実習室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": [],
+          "location_hint": "右側の最上段"
+        },
+        {
+          "name": "実習室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": [],
+          "location_hint": "右側の中段"
+        },
+        {
+          "name": "実習室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": [],
+          "location_hint": "右側の下段"
+        },
+        {
+          "name": "実習室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": [],
+          "location_hint": "右側下段の左隣"
+        },
+        {
+          "name": "ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "1階図の右側"
+        },
+        {
+          "name": "ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "1階図の下側"
+        }
+      ]
+    },
+    {
+      "building_id": "B",
+      "floor": "2階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "321教室",
+          "number": "321",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "322教室",
+          "number": "322",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "323教室",
+          "number": "323",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "324教室",
+          "number": "324",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "325教室",
+          "number": "325",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "326教室",
+          "number": "326",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "327教室",
+          "number": "327",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "328教室",
+          "number": "328",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "329教室",
+          "number": "329",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "330教室",
+          "number": "330",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "340教室",
+          "number": "340",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "350教室",
+          "number": "350",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "ベランダ",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        }
+      ]
+    }
+  ],
+  "excluded_labels": []
+}

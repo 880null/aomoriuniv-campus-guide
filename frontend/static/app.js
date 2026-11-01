@@ -3,6 +3,8 @@
 const $ = (id) => document.getElementById(id);
 let buildings = [];
 let viewedId = null;
+let viewedRoom = null;
+let buildingRooms = [];
 let state = null;
 let busy = false;
 let polling = false;
@@ -14,7 +16,7 @@ function setText(element, value) {
 }
 
 function ledNote(building) {
-  return building?.led_note || (building?.pin === null ? "配線未確認" : "");
+  return building?.led_note || (building?.pin === null ? "画面案内のみ" : "");
 }
 
 function showMessage(id, message) {
@@ -81,15 +83,20 @@ function renderState() {
     const label = button.querySelector(".building-state");
     if (label) setText(label, active ? (simulation ? "模擬点灯" : "点灯中") : note || (viewed ? "選択中" : "↗"));
   });
-  const building = buildings.find((item) => item.id === (viewedId || activeId));
-  setText($("destination-symbol"), building ? building.id : "↗");
-  setText($("destination-name"), building ? building.name : "行き先を選んでください");
-  setText($("destination-detail"), building
-    ? `地図記号 ${building.id} · ${building.name}　${building.pin === null ? `${ledNote(building)}のため、実機LEDは使用できません。` : building.led_note ? `${building.led_note}。実配線は確認してください。` : "教室の詳細配置は確認中です。"}`
-    : "一覧または地図の記号から選択できます。");
+  const building = buildings.find((item) => item.id === (viewedRoom ? viewedRoom.building_id : (viewedId || activeId)));
+  setText($("destination-symbol"), building ? building.symbol : "↗");
+  setText($("destination-name"), viewedRoom ? roomTitle(viewedRoom) : building ? building.name : "行き先を選んでください");
+  setText($("destination-detail"), viewedRoom ? roomLocation(viewedRoom)
+    : building ? `${building.name} · ${building.destination_count}地点。館内一覧から教室・施設を選べます。`
+      : "一覧または地図の記号から選択できます。");
+  document.querySelectorAll("[data-room]").forEach((button) => {
+    const selected = button.dataset.room === viewedRoom?.id;
+    button.classList.toggle("selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
   const indicator = $("led-indicator");
   indicator.classList.toggle("on", on && building?.id === activeId);
-  setText(indicator, !simulation && building?.pin === null ? ledNote(building)
+  setText(indicator, viewedRoom && !building ? "棟名未記載" : building && (!building.simulation_led || (!simulation && building.pin === null)) ? "画面案内のみ"
     : state.led_state === "unknown" ? "LED状態不明"
     : on && building?.id === activeId ? (simulation ? "模擬点灯中" : "LED点灯中")
       : on ? "別の施設が点灯中" : "全消灯");
@@ -128,21 +135,109 @@ async function action(work) {
   }
 }
 
-function selectBuilding(id) {
-  if (busy) return;
-  viewedId = id;
+function roomTitle(room) {
+  return room.number && !room.name.includes(room.number) ? `${room.number} · ${room.name}` : room.name;
+}
+
+function roomLocation(room) {
+  const building = buildings.find((item) => item.id === room.building_id);
+  return [building?.name || "棟名未記載", room.floor || "階未記載", room.area, room.location_hint].filter(Boolean).join(" · ");
+}
+
+function showEvidence(room) {
+  $("destination-evidence").hidden = !room;
+  if (!room) return;
+  setText($("location-note"), room.location_note || "LEDは建物の場所を示します。館内の位置は案内図で確認してください。");
+  $("destination-plan").href = room.local_plan;
+  $("destination-source").href = `${room.source}#page=${room.source_page}`;
+  setText($("destination-verified"), `${room.source_label} ${room.source_page}ページ · 資料確認 ${room.verified_on}（現地未照合）`);
+}
+
+function renderRooms(container, rooms) {
+  container.replaceChildren();
+  rooms.forEach((room) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "room-button";
+    button.dataset.room = room.id;
+    button.dataset.control = "";
+    const name = document.createElement("strong");
+    name.textContent = roomTitle(room);
+    const location = document.createElement("span");
+    location.textContent = roomLocation(room);
+    button.append(name, location);
+    button.addEventListener("click", () => selectRoom(room));
+    container.append(button);
+  });
+}
+
+function renderBuildingRooms() {
+  const floor = $("floor-filter").value;
+  const rooms = buildingRooms.filter((room) => !floor || (room.floor || "未記載") === floor);
+  renderRooms($("building-room-list"), rooms);
+  setText($("building-room-count"), `${rooms.length} / ${buildingRooms.length}地点`);
+  $("building-room-empty").hidden = rooms.length > 0;
   renderState();
+}
+
+async function loadBuildingRooms(id) {
   const building = buildings.find((item) => item.id === id);
-  if (state?.mode === "real" && building?.pin === null) {
-    showMessage("error", `${building.name}は${ledNote(building)}です。施設情報のみ表示し、点灯命令は送信しません。`);
+  $("room-browser").hidden = !building;
+  if (!building) { buildingRooms = []; return; }
+  // 表示対象が変わるたびに、前の建物の階・部屋を消してから読み込む。
+  $("building-room-list").replaceChildren();
+  buildingRooms = [];
+  setText($("room-browser-title"), `${building.name}の教室・施設`);
+  $("building-plan").href = building.floorplan.local_url;
+  setText($("building-room-count"), "読み込み中");
+  $("building-room-empty").hidden = true;
+  $("floor-filter").replaceChildren(new Option("すべての階", ""));
+  buildingRooms = (await api(`/api/rooms?building_id=${encodeURIComponent(id)}`)).rooms;
+  [...new Set(buildingRooms.map((room) => room.floor || "未記載"))].forEach((floor) => {
+    $("floor-filter").add(new Option(floor, floor));
+  });
+  if (viewedRoom) $("floor-filter").value = viewedRoom.floor || "未記載";
+  renderBuildingRooms();
+}
+
+async function guideBuilding(building) {
+  if (!building || !building.simulation_led || (state?.mode === "real" && building.pin === null)) {
+    // 案内できない建物へ移ったとき、前の行き先のLEDを残さない。
+    if (state?.led_state === "on") state = (await api("/api/off", {})).status;
+    showMessage("guide-note", building
+      ? `${building.name}は${ledNote(building)}です。画面と案内図で場所を確認してください。`
+      : "原図に棟名が明記されていないため、LED案内は行いません。該当ページを確認してください。");
     return;
   }
-  return action(async () => { state = (await api("/api/select", { building_id: id })).status; });
+  showMessage("guide-note", building.led_note ? `${building.name}：${building.led_note}。` : null);
+  state = (await api("/api/select", { building_id: building.id })).status;
+}
+
+function selectBuilding(id) {
+  return action(async () => {
+    viewedId = id;
+    viewedRoom = null;
+    showEvidence(null);
+    renderState();
+    await loadBuildingRooms(id);
+    await guideBuilding(buildings.find((item) => item.id === id));
+  });
+}
+
+function selectRoom(room) {
+  return action(async () => {
+    viewedRoom = room;
+    viewedId = room.building_id;
+    showEvidence(room);
+    renderState();
+    await loadBuildingRooms(room.building_id);
+    await guideBuilding(buildings.find((item) => item.id === room.building_id));
+  });
 }
 
 function renderList(items) {
   $("building-list").replaceChildren();
-  $("result-count").textContent = `${items.length} / 7`;
+  $("result-count").textContent = `${items.length} / ${buildings.length}`;
   $("empty-results").hidden = items.length > 0;
   items.forEach((building) => {
     const button = document.createElement("button");
@@ -150,10 +245,10 @@ function renderList(items) {
     button.className = "building-button";
     button.dataset.building = building.id;
     button.dataset.control = "";
-    button.setAttribute("aria-label", `${building.id} ${building.name}を選択${building.pin === null ? `（${ledNote(building)}）` : "してLEDで案内"}`);
+    button.setAttribute("aria-label", `${building.name}を選択${building.pin === null ? `（${ledNote(building)}）` : "してLEDで案内"}`);
     const symbol = document.createElement("span");
     symbol.className = "building-symbol";
-    symbol.textContent = building.id;
+    symbol.textContent = building.symbol;
     const name = document.createElement("span");
     name.className = "building-name";
     name.textContent = building.name;
@@ -168,9 +263,16 @@ function renderList(items) {
 }
 
 async function search(query) {
-  const result = await api(`/api/buildings?q=${encodeURIComponent(query)}`);
+  const [result, rooms] = await Promise.all([
+    api(`/api/buildings?q=${encodeURIComponent(query)}`),
+    api(`/api/rooms?q=${encodeURIComponent(query)}`),
+  ]);
   renderList(result.buildings);
+  $("room-results").hidden = !query.trim() || !rooms.total;
+  renderRooms($("search-room-list"), query.trim() ? rooms.rooms : []);
+  $("empty-results").hidden = result.buildings.length > 0 || rooms.total > 0;
   $("search-message").textContent = result.message;
+  renderState();
 }
 
 async function loadPorts() {
@@ -186,6 +288,7 @@ async function loadPorts() {
 async function loadMap() {
   const map = await api("/api/map");
   $("map-source").href = map.source_page;
+  setText($("map-count"), `地図${map.markers.length}施設 · 実機LED6施設 · 新・弓は略記`);
   const img = $("map-image");
   img.addEventListener("load", () => {
     img.hidden = false;
@@ -208,13 +311,13 @@ async function loadMap() {
     const button = document.createElement("button");
     button.className = "map-marker";
     button.type = "button";
-    button.textContent = marker.id;
+    button.textContent = building.symbol;
     button.dataset.building = marker.id;
     button.dataset.control = "";
     button.style.left = `${marker.x}%`;
     button.style.top = `${marker.y}%`;
     button.title = building.name + (building.pin === null ? `（${ledNote(building)}）` : "");
-    button.setAttribute("aria-label", `地図の${marker.id} ${building.name}を選択${building.pin === null ? `（${ledNote(building)}）` : "してLEDで案内"}`);
+    button.setAttribute("aria-label", `地図の${building.symbol} ${building.name}を選択${building.pin === null ? `（${ledNote(building)}）` : "してLEDで案内"}`);
     button.addEventListener("click", () => selectBuilding(marker.id));
     $("markers").append(button);
   });
@@ -231,14 +334,23 @@ $("reset-search").addEventListener("click", () => action(async () => {
 $("all-off").addEventListener("click", () => action(async () => {
   state = (await api("/api/off", {})).status;
   viewedId = null;
+  viewedRoom = null;
+  showEvidence(null);
+  $("room-browser").hidden = true;
+  showMessage("guide-note", null);
 }));
 document.querySelectorAll('input[name="mode"]').forEach((radio) => {
   radio.addEventListener("change", () => action(async () => {
     state = (await api("/api/mode", { mode: radio.value })).status;
     viewedId = null;
+    viewedRoom = null;
+    showEvidence(null);
+    $("room-browser").hidden = true;
+    showMessage("guide-note", null);
     if (state.mode === "real") await loadPorts();
   }));
 });
+$("floor-filter").addEventListener("change", renderBuildingRooms);
 $("refresh-ports").addEventListener("click", () => action(loadPorts));
 $("reconnect").addEventListener("click", () => action(async () => {
   const port = $("serial-port").value;
@@ -272,7 +384,7 @@ async function initialize() {
     state = (await api("/api/status")).status;
     renderList(buildings);
     $("search-message").textContent = result.message;
-    $("data-note").textContent = `確認済み教室：${result.verified_room_count}件。未登録の教室は推測で案内しません。施設名または地図からお探しください。`;
+    $("data-note").textContent = `公式案内図${result.source_count}点から、番号付きの室${result.verified_room_count}件・全${result.destination_count}地点を登録。棟や階の未記載箇所は明示します。図面との照合済み・現地未照合です。`;
     // 片方が失敗しても施設選択は使えるようにする。
     const results = await Promise.allSettled([loadMap(), loadPorts()]);
     const failed = results.find((item) => item.status === "rejected");

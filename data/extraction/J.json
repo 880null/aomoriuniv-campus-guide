@@ -1,0 +1,210 @@
+{
+  "source_id": "J",
+  "reviewed_pages": [
+    1
+  ],
+  "groups": [
+    {
+      "building_id": "J",
+      "floor": "1階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "ステージ",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "アリーナ",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "女子更衣室",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "男子更衣室",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "トレーニング室",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "玄関ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "会議室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "応接室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "事務室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "風除室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "器具庫",
+          "number": null,
+          "category": "storage",
+          "aliases": [],
+          "location_hint": "図の上側・左"
+        },
+        {
+          "name": "器具庫",
+          "number": null,
+          "category": "storage",
+          "aliases": [],
+          "location_hint": "図の上側・右"
+        },
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "research",
+          "aliases": [],
+          "location_hint": "女子更衣室・男子更衣室の下側"
+        },
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "research",
+          "aliases": [],
+          "location_hint": "図の左下、会議室の左隣"
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "身障者用WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "障がい者用トイレ",
+            "車いす用トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "J",
+      "floor": "2階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "トレーニングスペース",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "研修室",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "ミーティングルーム",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "倉庫",
+          "number": null,
+          "category": "storage",
+          "aliases": [],
+          "location_hint": "図の上側・左"
+        },
+        {
+          "name": "倉庫",
+          "number": null,
+          "category": "storage",
+          "aliases": [],
+          "location_hint": "図の上側・右"
+        },
+        {
+          "name": "ランニングスペース",
+          "number": null,
+          "category": "sports",
+          "aliases": [],
+          "location_hint": "図の左側"
+        },
+        {
+          "name": "ランニングスペース",
+          "number": null,
+          "category": "sports",
+          "aliases": [],
+          "location_hint": "図の右側"
+        },
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "research",
+          "aliases": [],
+          "location_hint": "図の左下・上段"
+        },
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "research",
+          "aliases": [],
+          "location_hint": "図の左下・中段"
+        },
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "research",
+          "aliases": [],
+          "location_hint": "図の左下・下段"
+        }
+      ]
+    }
+  ],
+  "excluded_labels": []
+}

@@ -1,0 +1,172 @@
+{
+  "source_id": "C",
+  "reviewed_pages": [
+    1
+  ],
+  "groups": [
+    {
+      "building_id": "C",
+      "floor": "1階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "書庫",
+          "number": null,
+          "category": "storage",
+          "aliases": []
+        },
+        {
+          "name": "図書館事務室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "ラーニングスペース",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "学術雑誌コーナー",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "開架書架",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "図の上側"
+        },
+        {
+          "name": "開架書架",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "図の右側"
+        }
+      ]
+    },
+    {
+      "building_id": "C",
+      "floor": "2階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "422教室",
+          "number": "422",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "423教室",
+          "number": "423",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "424教室",
+          "number": "424",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "425教室",
+          "number": "425",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "面談室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "講師室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "山田高校通信課程青森校",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "書庫",
+          "number": null,
+          "category": "storage",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "building_id": "C",
+      "floor": "3階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "432教室",
+          "number": "432",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "434教室",
+          "number": "434",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "空手場",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "実習室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": []
+        }
+      ]
+    }
+  ],
+  "excluded_labels": [
+    "吹抜（床のない空間であり目的室ではない）"
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "source_id": "H",
+  "reviewed_pages": [
+    1
+  ],
+  "groups": [
+    {
+      "building_id": "H",
+      "floor": "1階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "学友会執行部室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "学生ラウンジ",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "テラス",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "物入",
+          "number": null,
+          "category": "storage",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "H",
+      "floor": "2階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "休憩室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "厨房",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "カウンター",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "レストラン",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "風除室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "食品庫",
+          "number": null,
+          "category": "storage",
+          "aliases": []
+        },
+        {
+          "name": "身障者用WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "障がい者用トイレ",
+            "車いす用トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "H",
+      "floor": "3階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "学修支援センター／レストラン",
+          "number": null,
+          "category": "facility",
+          "aliases": [
+            "学修支援センター"
+          ]
+        },
+        {
+          "name": "物入",
+          "number": null,
+          "category": "storage",
+          "aliases": []
+        }
+      ]
+    }
+  ],
+  "excluded_labels": []
+}

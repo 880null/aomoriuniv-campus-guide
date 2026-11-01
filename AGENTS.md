@@ -35,3 +35,10 @@ cd firmware && pio run
 ```
 最後のコマンドにはPlatformIOとAVRツールチェーンが必要。
 変更報告にはファイル、動作、確認結果、未確認事項を記載する。
+
+## 公式案内図のデータ
+- 検索対象は14施設・369地点。物理LEDのPIN_MAPとは分離する。追加施設に出力ピンを割り当てない。
+- 転記元はdata/extraction/A〜K.json。rooms.jsonを直接編集せずscripts/build_room_catalog.pyで生成する。
+- 原図・確認ページ・取得日・SHA-256を保持する。棟や階の未記載はnullと理由を残し、番号から階を推定しない。
+- 同名室を上書きしない。詳細と原図へのリンク、階別一覧を維持する。
+- 変更時はpython scripts/build_room_catalog.py --checkも実行する。

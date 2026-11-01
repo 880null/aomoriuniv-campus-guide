@@ -1,0 +1,109 @@
+{
+  "source_id": "I",
+  "reviewed_pages": [
+    1
+  ],
+  "groups": [
+    {
+      "building_id": "I",
+      "floor": "1階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "事務室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "エントランス",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "用具庫",
+          "number": null,
+          "category": "storage",
+          "aliases": []
+        },
+        {
+          "name": "ステージ",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "屋内運動場",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "女子更衣室",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "I",
+      "floor": "2階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "ギャラリー",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "歩道",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "図の上側"
+        },
+        {
+          "name": "歩道",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "図の下側"
+        }
+      ]
+    }
+  ],
+  "excluded_labels": [
+    "ステージ上部（下階のステージ上の空間）"
+  ]
+}

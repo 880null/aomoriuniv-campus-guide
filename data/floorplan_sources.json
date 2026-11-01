@@ -1,0 +1,125 @@
+{
+  "sources": [
+    {
+      "building_id": "A",
+      "label": "A:本館",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/c1accbaf9f3b167a50f9240a9593a8f1.pdf",
+      "path": "frontend/static/floorplans/A.pdf",
+      "sha256": "019e0fece03ba89312891fcea8f002dba870246d62c15b466add2040e59b30de",
+      "bytes": 1251189,
+      "pages": 1,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "B",
+      "label": "B:3号館",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/14da6330be99f975740282ba3fbb92bb.pdf",
+      "path": "frontend/static/floorplans/B.pdf",
+      "sha256": "de55bec33af719f0bcfe87bbf1a63b8b75b53eb8f7b161f75326afde6096ee86",
+      "bytes": 593297,
+      "pages": 1,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "C",
+      "label": "C:4号館",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/1b467330630e19d04293adf13388ac40.pdf",
+      "path": "frontend/static/floorplans/C.pdf",
+      "sha256": "59c805176af4aad1590df9c9407890d6468e2c39e3c08fe5d9e51c315197769a",
+      "bytes": 607617,
+      "pages": 1,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "D",
+      "label": "D:5号館",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/edf631d22d23897d4e25e160b08b3419.pdf",
+      "path": "frontend/static/floorplans/D.pdf",
+      "sha256": "fa0e01fa5eccdd4ed6cec0bc5d8bf7e0c96d32ad42e36d98f5f4b98a65cdb334",
+      "bytes": 1205624,
+      "pages": 3,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "E",
+      "label": "E:6号館",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/6145088c430d1642134448819c3122d1.pdf",
+      "path": "frontend/static/floorplans/E.pdf",
+      "sha256": "02a1eae3edd887bffb121c1a7fec1b051aea8d73b6e2ff1cca34ae4065186efc",
+      "bytes": 681371,
+      "pages": 2,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "F",
+      "label": "F:7号館",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/e195c522699375f34d8cdc6943e13b4d.pdf",
+      "path": "frontend/static/floorplans/F.pdf",
+      "sha256": "7676082e6d7eaf5052c8932e35f1885a173cc420969c0e92eeffc5b0bde0ab27",
+      "bytes": 1014450,
+      "pages": 2,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "G",
+      "label": "G:図書館新館",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/f8a1f546681271ebbbd398b1ae3f11b8.pdf",
+      "path": "frontend/static/floorplans/G.pdf",
+      "sha256": "33bb087adaa370505aea67f1611f6eae1f1a6877ccc6cf2f00b3fe8f7ead1031",
+      "bytes": 597699,
+      "pages": 1,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "H",
+      "label": "H:レストラン棟",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2023/05/12f87bf9ab1bdc9b00b911188c989d3d.pdf",
+      "path": "frontend/static/floorplans/H.pdf",
+      "sha256": "69891e530bbb967ba0e4160d9fdb5bbef6de65a639b853d2a19f3504046cacd6",
+      "bytes": 537811,
+      "pages": 1,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "I",
+      "label": "I:第1体育館",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2024/08/fd14a1be3a33df7c13e057a9a398e78e.pdf",
+      "path": "frontend/static/floorplans/I.pdf",
+      "sha256": "ef79854f963b5810e0dce02ae8f09debc35dc0349920f1af8603fc99dd8b5b7e",
+      "bytes": 588631,
+      "pages": 1,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "J",
+      "label": "J:第2体育館（正徳館）",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2023/05/36cc7cfc929d0848d427521c6fdbfad8.pdf",
+      "path": "frontend/static/floorplans/J.pdf",
+      "sha256": "5e0f319a17c8a3f4f51ee69323c82e7cc3780f4873be4fe76ce0cc82eb1f719b",
+      "bytes": 569160,
+      "pages": 1,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    },
+    {
+      "building_id": "K",
+      "label": "K:青森ねぶた健康研究所（創薬棟）",
+      "url": "https://www.aomori-u.ac.jp/wp/wp-content/uploads/2026/07/f034293b6f35f2fddfad93e2748dad1a.pdf",
+      "path": "frontend/static/floorplans/K.pdf",
+      "sha256": "3b23ffbb9d20785e6fb5205ee63126103177e0fb5b10d8d392965a3adb0ec308",
+      "bytes": 430252,
+      "pages": 1,
+      "source_page": "https://www.aomori-u.ac.jp/access/",
+      "retrieved_on": "2026-11-01"
+    }
+  ]
+}

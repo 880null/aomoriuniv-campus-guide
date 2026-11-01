@@ -410,6 +410,8 @@ form>label,.port-options>label {
 .building-list {
   display: grid;
   gap: 8px;
+  max-height: 430px;
+  overflow-y: auto;
 }
 
 .building-button {
@@ -442,6 +444,7 @@ form>label,.port-options>label {
 }
 
 .building-symbol {
+  flex-shrink: 0;
   width: 31px;
   height: 31px;
   display: flex;
@@ -452,6 +455,33 @@ form>label,.port-options>label {
   color: var(--green);
   font-size: 14px;
   font-weight: 700;
+}
+
+.room-results { margin-top: 22px; }
+.room-results h3, .room-browser h3 { font-size: 13px; margin: 0; }
+.room-list { display: grid; gap: 8px; max-height: 340px; overflow-y: auto; padding: 4px; margin: 10px -4px 0; }
+.room-button { width: 100%; text-align: left; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); padding: 12px; overflow-wrap: anywhere; }
+.room-button strong { display: block; font-size: 12px; line-height: 1.6; }
+.room-button span { display: block; font-size: 10px; line-height: 1.7; color: var(--muted); margin-top: 4px; }
+.room-button:hover, .room-button.selected { background: var(--pale); border-color: var(--green); }
+.room-browser { margin: 0 25px 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.room-browser-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.room-browser-heading label { font-size: 11px; white-space: nowrap; }
+.room-browser-heading select { margin-left: 8px; padding: 6px; border: 1px solid var(--line); border-radius: 6px; color: var(--ink); background: #fff; max-width: 135px; }
+.floorplan-links { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: 10px; line-height: 1.8; color: var(--muted); }
+.destination-evidence, .guide-note { margin: 0 25px 20px; font-size: 11px; line-height: 1.9; color: var(--muted); overflow-wrap: anywhere; }
+.destination-evidence p { margin: 0 0 8px; }
+.destination-evidence a { display: inline-block; margin-right: 16px; }
+.destination-evidence span { display: block; margin-top: 6px; font-size: 10px; }
+.guide-note { padding: 10px 14px; border-radius: 8px; background: #f5f7f1; }
+
+@media(max-width:760px) {
+  .room-browser { margin: 0 18px 20px; }
+  .room-browser-heading { align-items: flex-start; }
+  .destination { flex-wrap: wrap; }
+  .destination-copy { min-width: 150px; }
+  .destination-evidence, .guide-note { margin-left: 18px; margin-right: 18px; }
+  .building-list { max-height: 330px; }
 }
 
 .active .building-symbol {

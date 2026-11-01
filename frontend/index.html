@@ -31,22 +31,30 @@
       <aside class="panel finder" aria-labelledby="finder-title">
         <div class="section-heading"><span class="step">01</span><h2 id="finder-title">行き先を探す</h2></div>
         <form id="search-form" role="search">
-          <label for="search">建物名・教室番号</label>
-          <div class="search-box"><input id="search" name="q" type="search" placeholder="例：1号館、レストラン" maxlength="80" autocomplete="off" data-control><button class="search-submit" type="submit" aria-label="検索する" data-control>↗</button></div>
+          <label for="search">建物名・教室番号・施設名</label>
+          <div class="search-box"><input id="search" name="q" type="search" placeholder="例：5301、保健室、学修支援" maxlength="80" autocomplete="off" data-control><button class="search-submit" type="submit" aria-label="検索する" data-control>↗</button></div>
           <p class="field-note">教室番号は確認済みの情報だけを検索します。</p>
         </form>
         <div class="list-heading"><h3>施設一覧 <span id="result-count">—</span></h3><button id="reset-search" class="text-button" type="button" data-control>すべて表示</button></div>
         <p id="search-message" class="search-message" role="status">施設情報を読み込んでいます。</p>
         <div id="building-list" class="building-list"></div>
+        <section id="room-results" class="room-results" hidden aria-labelledby="room-results-title"><h3 id="room-results-title">教室・施設の検索結果</h3><div id="search-room-list" class="room-list"></div></section>
         <p id="empty-results" class="empty-results" hidden>教室情報は未登録の場合があります。<br>建物名で検索してください。</p>
-        <div class="finder-note"><span aria-hidden="true">ⓘ</span><p>LED対応：1・3・5・6・7号館、レストラン棟。<br>4号館はLED未実装、レストラン棟はD7に仮設定しています。<br>2号館・図書館新館・体育館はLED案内の対象外です。</p></div>
+        <div class="finder-note"><span aria-hidden="true">ⓘ</span><p>LED対応：1・3・5・6・7号館、レストラン棟。<br>4号館はLED未実装、レストラン棟はD7に仮設定しています。<br>図書館・体育館などは画面と案内図でご案内します。</p></div>
       </aside>
 
       <section class="panel map-panel" aria-labelledby="map-title">
         <div class="map-heading"><div class="section-heading"><span class="step">02</span><h2 id="map-title">地図で場所を確認</h2></div><span class="map-hint"><span class="legend-dot"></span>記号を押して選択</span></div>
-        <div class="map-wrap"><div id="campus-map" class="campus-map"><img id="map-image" alt="青森大学の公式キャンパスマップ。Aが1号館、Bが3号館、Cが4号館、Dが5号館、Eが6号館、Fが7号館、Hがレストラン棟。" width="1024" height="765" hidden><div id="markers"></div></div><p id="map-loading" class="map-loading">地図を読み込んでいます。</p></div>
-        <div class="map-credit"><span>地図7施設 · 実機LED6施設</span><a id="map-source" href="https://www.aomori-u.ac.jp/access/" target="_blank" rel="noopener noreferrer">地図画像：青森大学 ↗</a></div>
+        <div class="map-wrap"><div id="campus-map" class="campus-map"><img id="map-image" alt="青森大学の公式キャンパスマップ。A〜Kの各施設、新研究棟、弓道場を選択できます。施設一覧からも探せます。" width="1024" height="765" hidden><div id="markers"></div></div><p id="map-loading" class="map-loading">地図を読み込んでいます。</p></div>
+        <div class="map-credit"><span id="map-count">実機LED6施設</span><a id="map-source" href="https://www.aomori-u.ac.jp/access/" target="_blank" rel="noopener noreferrer">地図画像：青森大学 ↗</a></div>
         <div class="destination" aria-live="polite"><span id="destination-symbol" class="destination-symbol" aria-hidden="true">↗</span><div class="destination-copy"><p class="eyebrow">YOUR DESTINATION</p><h3 id="destination-name">行き先を選んでください</h3><p id="destination-detail">一覧または地図の記号から選択できます。</p></div><span id="led-indicator" class="led-indicator">未選択</span></div>
+        <div class="destination-evidence" id="destination-evidence" hidden><p id="location-note"></p><a id="destination-plan" target="_blank" rel="noopener noreferrer">該当ページの案内図を開く ↗</a><a id="destination-source" target="_blank" rel="noopener noreferrer">公式掲載元 ↗</a><span id="destination-verified"></span></div>
+        <p id="guide-note" class="guide-note" role="status" hidden></p>
+        <section class="room-browser" id="room-browser" aria-labelledby="room-browser-title" hidden>
+          <div class="room-browser-heading"><h3 id="room-browser-title">館内の教室・施設</h3><label for="floor-filter">階<select id="floor-filter" data-control><option value="">すべての階</option></select></label></div>
+          <div class="floorplan-links"><a id="building-plan" target="_blank" rel="noopener noreferrer">建物の案内図を開く ↗</a><span id="building-room-count"></span></div>
+          <div id="building-room-list" class="room-list"></div><p id="building-room-empty" class="field-note" hidden>個別の教室名・番号は原図に記載されていません。案内図で確認してください。</p>
+        </section>
         <div class="map-actions"><p id="led-summary">物理LEDの状態はまだ確認できていません。</p><button id="all-off" class="secondary-button" type="button" data-control><span aria-hidden="true">○</span> すべて消灯</button></div>
       </section>
     </div>

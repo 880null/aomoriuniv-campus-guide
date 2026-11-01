@@ -5,7 +5,7 @@ from pathlib import Path
 from flask import Flask, jsonify, request, send_from_directory
 from werkzeug.exceptions import HTTPException
 
-from backend.catalog import Catalog
+from backend.catalog import Catalog, PIN_MAP
 from backend.controller import ControllerError, LedController
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -67,7 +67,27 @@ def create_app(controller=None, data_directory=None):
         if len(query) > 80:
             raise ValueError("検索は80文字以内で入力してください。")
         results, message = catalog.search(query)
-        return jsonify(buildings=results, message=message, verified_room_count=len(catalog.rooms))
+        return jsonify(buildings=results, message=message, verified_room_count=len(catalog.rooms),
+                       destination_count=len(catalog.destinations), source_count=len(catalog.sources))
+
+    @app.get("/api/rooms")
+    def rooms():
+        query = request.args.get("q", "")
+        building_id = request.args.get("building_id")
+        floor = request.args.get("floor")
+        if any(len(value or "") > 80 for value in (query, building_id, floor)):
+            raise ValueError("検索は80文字以内で入力してください。")
+        if building_id and building_id not in catalog.by_id:
+            return jsonify(error="未登録の建物です。"), 404
+        results = catalog.search_destinations(query, building_id, floor)
+        return jsonify(rooms=results, total=len(results))
+
+    @app.get("/api/rooms/<room_id>")
+    def room_detail(room_id):
+        room = catalog.by_room_id.get(room_id)
+        if not room:
+            return jsonify(error="未登録の案内地点です。"), 404
+        return jsonify(room=room, building=catalog.by_id.get(room["building_id"]))
 
     @app.get("/api/map")
     def campus_map():
@@ -88,6 +108,8 @@ def create_app(controller=None, data_directory=None):
             raise ValueError("building_idは文字列が必要です。")
         if key not in catalog.by_id:
             return jsonify(error="この建物はLED案内の対象外です。"), 404
+        if key not in PIN_MAP:
+            raise ValueError("この施設は画面案内のみです。LEDはありません。")
         return jsonify(status=leds.select(key))
 
     @app.post("/api/off")

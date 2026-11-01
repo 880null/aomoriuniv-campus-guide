@@ -1,0 +1,195 @@
+{
+  "source_id": "E",
+  "reviewed_pages": [
+    1,
+    2
+  ],
+  "groups": [
+    {
+      "building_id": "E",
+      "floor": "1階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "風除室",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "図の上側"
+        },
+        {
+          "name": "風除室",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "図の下側"
+        }
+      ]
+    },
+    {
+      "building_id": "E",
+      "floor": "2階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "621教室",
+          "number": "621",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "622教室",
+          "number": "622",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "記念ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "調整室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "倉庫",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "玄関ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "ベランダ",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "風除室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "中庭",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "E",
+      "floor": null,
+      "page": 1,
+      "area": "",
+      "note": "表題に記載。個別の階・区画の表記なし",
+      "entries": [
+        {
+          "name": "集いのスペース",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "building_id": "E",
+      "floor": "3階",
+      "page": 2,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "631教室",
+          "number": "631",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "632教室",
+          "number": "632",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "633教室",
+          "number": "633",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "E",
+      "floor": "4階",
+      "page": 2,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "641教室",
+          "number": "641",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "642教室",
+          "number": "642",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    }
+  ],
+  "excluded_labels": []
+}

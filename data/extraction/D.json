@@ -1,0 +1,957 @@
+{
+  "source_id": "D",
+  "reviewed_pages": [
+    1,
+    2,
+    3
+  ],
+  "groups": [
+    {
+      "building_id": "D",
+      "floor": "1階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "5101教室",
+          "number": "5101",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "5102教室",
+          "number": "5102",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "5103教室",
+          "number": "5103",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "5104教室",
+          "number": "5104",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "5105教室（アクティブラーニング室）",
+          "number": "5105",
+          "category": "classroom",
+          "aliases": [
+            "アクティブラーニング室",
+            "5105教室"
+          ]
+        },
+        {
+          "name": "学生ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "玄関ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "風除室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "前室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "応接室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "キャリア支援課",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "暗室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "電子顕微鏡室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "薬学部 液体クロマトグラフ質量分析計、NMR室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": [
+            "液体クロマトグラフ質量分析計",
+            "NMR室"
+          ]
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "ELV",
+          "number": null,
+          "category": "elevator",
+          "aliases": [
+            "エレベーター"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "D",
+      "floor": "2階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "薬学部共用試験実習室",
+          "number": "5201",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "準備室",
+          "number": "5202",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "準備室",
+          "number": "5203",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "学生自習室",
+          "number": "5204",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "5205教室",
+          "number": "5205",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "5206教室",
+          "number": "5206",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5207",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "実習室",
+          "number": "5208",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "実習室",
+          "number": "5209",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部学生実験室",
+          "number": "5210",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部学生実験室",
+          "number": "5211",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部学生実験準備室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "ELV",
+          "number": null,
+          "category": "elevator",
+          "aliases": [
+            "エレベーター"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "D",
+      "floor": "3階",
+      "page": 2,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "コンピュータ演習室A",
+          "number": "5301",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5302",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5303",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部学生実験室（第1ファブスペース）",
+          "number": "5304",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部共用試験実習室",
+          "number": "5305",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "演習室",
+          "number": "5306",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部学生実験室",
+          "number": "5307",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5308",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5309",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "コンピュータ演習室C",
+          "number": "5310",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "サーバー室",
+          "number": "5311",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "コンピュータ演習室B",
+          "number": "5312",
+          "category": "classroom",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "research",
+          "aliases": [],
+          "location_hint": "図の上側、5306と5307の間（番号表記なし）"
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "ELV",
+          "number": null,
+          "category": "elevator",
+          "aliases": [
+            "エレベーター"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "D",
+      "floor": "4階",
+      "page": 2,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "薬学部研究実験室",
+          "number": "5401",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5402",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5403",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5404",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "模擬薬局",
+          "number": "5405",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部研究実験室",
+          "number": "5406",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5407",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部研究実験室",
+          "number": "5408",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5409",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5410",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部研究実験室",
+          "number": "5411",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部研究実験室",
+          "number": "5412",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5413",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5414",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5415",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5416",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5417",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5418",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5419",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5420",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部研究実験室",
+          "number": "5421",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5422",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5423",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5424",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5425",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5426",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5427",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5428",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5429",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": [],
+          "location_hint": "図の左下、5402の下側（番号表記なし）"
+        },
+        {
+          "name": "ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "ELV",
+          "number": null,
+          "category": "elevator",
+          "aliases": [
+            "エレベーター"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "D",
+      "floor": "5階",
+      "page": 3,
+      "area": "",
+      "note": "原図注記：実験室は教員研究室をかねています。",
+      "entries": [
+        {
+          "name": "薬学部研究実験室・研究室",
+          "number": "5501",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5502",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5503",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室・研究室",
+          "number": "5504",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5505",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5506",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5507",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室・研究室",
+          "number": "5508",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5509",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5510",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5511",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室・研究室",
+          "number": "5512",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5513",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5514",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室・研究室",
+          "number": "5515",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室・研究室",
+          "number": "5516",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室・研究室",
+          "number": "5517",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5518",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5519",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室・研究室",
+          "number": "5520",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究実験室",
+          "number": "5521",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "薬学部中央機器室",
+          "number": "5522",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "第2事務室",
+          "number": "5523",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "非常勤講師控室",
+          "number": "5524",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "談話室",
+          "number": "5525",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "低温実験室",
+          "number": "5526",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "学生自習室",
+          "number": "5527",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "薬学教育センター",
+          "number": "5528",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5529",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5530",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5531",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": null,
+          "category": "research",
+          "aliases": [],
+          "location_hint": "図の上側、5510と5511の間（番号表記なし）"
+        },
+        {
+          "name": "ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "ELV",
+          "number": null,
+          "category": "elevator",
+          "aliases": [
+            "エレベーター"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "D",
+      "floor": "6階",
+      "page": 3,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "研究室",
+          "number": "5601",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "資材室",
+          "number": "5602",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5603",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部研究実験室",
+          "number": "5604",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "第四会議室",
+          "number": "5605",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "第五会議室",
+          "number": "5606",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "薬学部長室",
+          "number": "5607",
+          "category": "room",
+          "aliases": []
+        },
+        {
+          "name": "薬学部研究室",
+          "number": "5609",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5610",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "研究室",
+          "number": "5611",
+          "category": "research",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部研究実験室",
+          "number": "5612",
+          "category": "laboratory",
+          "aliases": []
+        },
+        {
+          "name": "ソフトウェア情報学部研究実験室（第2ファブスペース）",
+          "number": null,
+          "category": "laboratory",
+          "aliases": [
+            "第2ファブスペース"
+          ],
+          "location_hint": "図の上側、5602と5603の間（番号表記なし）"
+        },
+        {
+          "name": "ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "湯沸室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "物入",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "ファンルーム",
+          "number": null,
+          "category": "utility",
+          "aliases": [],
+          "location_hint": "図の左側"
+        },
+        {
+          "name": "ファンルーム",
+          "number": null,
+          "category": "utility",
+          "aliases": [],
+          "location_hint": "図の右側"
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "ELV",
+          "number": null,
+          "category": "elevator",
+          "aliases": [
+            "エレベーター"
+          ]
+        }
+      ]
+    }
+  ],
+  "excluded_labels": [
+    "吹抜（床のない空間であり目的室ではない）"
+  ]
+}

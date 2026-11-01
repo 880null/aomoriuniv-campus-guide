@@ -1,9 +1,153 @@
 [
-  {"id":"A","name":"1号館","aliases":["一号館","本館"],"pin":2},
-  {"id":"B","name":"3号館","aliases":["三号館"],"pin":3},
-  {"id":"C","name":"4号館","aliases":["四号館"],"pin":null,"led_note":"LED未実装"},
-  {"id":"D","name":"5号館","aliases":["五号館"],"pin":4},
-  {"id":"E","name":"6号館","aliases":["六号館"],"pin":5},
-  {"id":"F","name":"7号館","aliases":["七号館"],"pin":6},
-  {"id":"H","name":"レストラン棟","aliases":["レストラン","食堂","学食"],"pin":7,"led_note":"D7に仮設定"}
+  {
+    "id": "A",
+    "name": "1号館",
+    "aliases": [
+      "一号館",
+      "本館"
+    ],
+    "pin": 2,
+    "source_id": "A",
+    "symbol": "A"
+  },
+  {
+    "id": "B",
+    "name": "3号館",
+    "aliases": [
+      "三号館"
+    ],
+    "pin": 3,
+    "source_id": "B",
+    "symbol": "B"
+  },
+  {
+    "id": "C",
+    "name": "4号館",
+    "aliases": [
+      "四号館"
+    ],
+    "pin": null,
+    "led_note": "LED未実装",
+    "source_id": "C",
+    "symbol": "C"
+  },
+  {
+    "id": "D",
+    "name": "5号館",
+    "aliases": [
+      "五号館"
+    ],
+    "pin": 4,
+    "source_id": "D",
+    "symbol": "D"
+  },
+  {
+    "id": "E",
+    "name": "6号館",
+    "aliases": [
+      "六号館"
+    ],
+    "pin": 5,
+    "source_id": "E",
+    "symbol": "E"
+  },
+  {
+    "id": "F",
+    "name": "7号館",
+    "aliases": [
+      "七号館"
+    ],
+    "pin": 6,
+    "source_id": "F",
+    "symbol": "F"
+  },
+  {
+    "id": "G",
+    "name": "図書館新館",
+    "aliases": [
+      "新館図書館"
+    ],
+    "symbol": "G",
+    "source_id": "G",
+    "pin": null,
+    "led_note": "画面案内のみ"
+  },
+  {
+    "id": "H",
+    "name": "レストラン棟",
+    "aliases": [
+      "レストラン",
+      "食堂",
+      "学食"
+    ],
+    "pin": 7,
+    "led_note": "D7に仮設定",
+    "source_id": "H",
+    "symbol": "H"
+  },
+  {
+    "id": "I",
+    "name": "第1体育館",
+    "aliases": [
+      "第一体育館"
+    ],
+    "symbol": "I",
+    "source_id": "I",
+    "pin": null,
+    "led_note": "画面案内のみ"
+  },
+  {
+    "id": "J",
+    "name": "第2体育館（正徳館）",
+    "aliases": [
+      "第二体育館",
+      "正徳館"
+    ],
+    "symbol": "J",
+    "source_id": "J",
+    "pin": null,
+    "led_note": "画面案内のみ"
+  },
+  {
+    "id": "K",
+    "name": "青森ねぶた健康研究所（創薬棟）",
+    "aliases": [
+      "青森ねぶた健康研究所",
+      "創薬棟",
+      "8号館A棟"
+    ],
+    "symbol": "K",
+    "source_id": "K",
+    "pin": null,
+    "led_note": "画面案内のみ"
+  },
+  {
+    "id": "N",
+    "name": "新研究棟",
+    "aliases": [],
+    "symbol": "新",
+    "source_id": "A",
+    "pin": null,
+    "led_note": "画面案内のみ"
+  },
+  {
+    "id": "Q",
+    "name": "弓道場",
+    "aliases": [],
+    "symbol": "弓",
+    "source_id": "A",
+    "pin": null,
+    "led_note": "画面案内のみ"
+  },
+  {
+    "id": "T",
+    "name": "2号館",
+    "aliases": [
+      "二号館"
+    ],
+    "symbol": "2",
+    "source_id": "A",
+    "pin": null,
+    "led_note": "画面案内のみ"
+  }
 ]

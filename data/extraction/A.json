@@ -1,0 +1,337 @@
+{
+  "source_id": "A",
+  "reviewed_pages": [
+    1
+  ],
+  "groups": [
+    {
+      "building_id": "A",
+      "floor": "1階",
+      "page": 1,
+      "area": "1号館",
+      "note": "",
+      "entries": [
+        {
+          "name": "介護福祉実習室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "building_id": "A",
+      "floor": "2階",
+      "page": 1,
+      "area": "1号館",
+      "note": "",
+      "entries": [
+        {
+          "name": "実習室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "building_id": "A",
+      "floor": "1階",
+      "page": 1,
+      "area": "本館",
+      "note": "",
+      "entries": [
+        {
+          "name": "クラブ室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "校務員室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "玄関",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "倉庫",
+          "number": null,
+          "category": "storage",
+          "aliases": [],
+          "location_hint": "地下1階の表記はこの倉庫に付記",
+          "floor_override": "地下1階"
+        }
+      ]
+    },
+    {
+      "building_id": "A",
+      "floor": "2階",
+      "page": 1,
+      "area": "本館",
+      "note": "",
+      "entries": [
+        {
+          "name": "青森山田学園法人本部",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "大学事務局",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "大学学生募集戦略局",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "印刷室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "学生昇降口",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "A",
+      "floor": "3階",
+      "page": 1,
+      "area": "本館",
+      "note": "",
+      "entries": [
+        {
+          "name": "会議室",
+          "number": null,
+          "category": "meeting",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "building_id": null,
+      "floor": null,
+      "page": 1,
+      "area": "家政・調理実習室",
+      "note": "原図に階・棟を特定する表記なし",
+      "entries": [
+        {
+          "name": "家政・調理実習室",
+          "number": null,
+          "category": "laboratory",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "building_id": "N",
+      "floor": "1階",
+      "page": 1,
+      "area": "新研究棟",
+      "note": "",
+      "entries": [
+        {
+          "name": "応接室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "N",
+      "floor": "2階",
+      "page": 1,
+      "area": "新研究棟",
+      "note": "",
+      "entries": [
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "N",
+      "floor": "3階",
+      "page": 1,
+      "area": "新研究棟",
+      "note": "階の表記はあるが個別区画の名称・番号なし",
+      "entries": []
+    },
+    {
+      "building_id": "T",
+      "floor": "1階",
+      "page": 1,
+      "area": "2号館",
+      "note": "階の表記はあるが個別区画の名称・番号なし",
+      "entries": []
+    },
+    {
+      "building_id": "T",
+      "floor": "2階",
+      "page": 1,
+      "area": "2号館",
+      "note": "階の表記はあるが個別区画の名称・番号なし",
+      "entries": []
+    },
+    {
+      "building_id": "Q",
+      "floor": null,
+      "page": 1,
+      "area": "弓道場",
+      "note": "原図に階表記なし",
+      "entries": [
+        {
+          "name": "弓道場",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "building_id": null,
+      "floor": null,
+      "page": 1,
+      "area": "案内図左下の書庫",
+      "note": "原図に棟名・階の表記なし。推測で建物やLEDへ対応づけない",
+      "entries": [
+        {
+          "name": "書庫",
+          "number": null,
+          "category": "storage",
+          "aliases": [],
+          "location_hint": "左側の区画"
+        },
+        {
+          "name": "書庫",
+          "number": null,
+          "category": "storage",
+          "aliases": [],
+          "location_hint": "右側の区画"
+        }
+      ]
+    },
+    {
+      "building_id": null,
+      "floor": "1階",
+      "page": 1,
+      "area": "体育館（本館・1・2号館平面図の右上）",
+      "note": "原図は体育館とだけ表記。I/Jとの同一性は未確認",
+      "entries": [
+        {
+          "name": "入口",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "ステージ",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": null,
+      "floor": null,
+      "page": 1,
+      "area": "体育館（本館・1・2号館平面図の右上）",
+      "note": "このギャラリーの階は原図に明記なし",
+      "entries": [
+        {
+          "name": "ギャラリー",
+          "number": null,
+          "category": "sports",
+          "aliases": []
+        }
+      ]
+    }
+  ],
+  "excluded_labels": []
+}

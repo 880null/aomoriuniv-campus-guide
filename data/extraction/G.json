@@ -1,0 +1,142 @@
+{
+  "source_id": "G",
+  "reviewed_pages": [
+    1
+  ],
+  "groups": [
+    {
+      "building_id": "G",
+      "floor": "1階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "閲覧室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "事務室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "風除室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "ポーチ",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    },
+    {
+      "building_id": "G",
+      "floor": "2階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "閲覧室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "整理室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        }
+      ]
+    },
+    {
+      "building_id": "G",
+      "floor": "3階",
+      "page": 1,
+      "area": "",
+      "note": "",
+      "entries": [
+        {
+          "name": "ホール",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "視聴覚室",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "ステージ",
+          "number": null,
+          "category": "facility",
+          "aliases": []
+        },
+        {
+          "name": "準備室",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "図の上側・左"
+        },
+        {
+          "name": "準備室",
+          "number": null,
+          "category": "facility",
+          "aliases": [],
+          "location_hint": "図の上側・右"
+        },
+        {
+          "name": "男子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "男子トイレ",
+            "トイレ"
+          ]
+        },
+        {
+          "name": "女子WC",
+          "number": null,
+          "category": "restroom",
+          "aliases": [
+            "女子トイレ",
+            "トイレ"
+          ]
+        }
+      ]
+    }
+  ],
+  "excluded_labels": [
+    "吹抜（床のない空間であり目的室ではない）"
+  ]
+}
