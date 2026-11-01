@@ -1,9 +1,9 @@
 [
   {"id":"A","name":"1号館","aliases":["一号館","本館"],"pin":2},
   {"id":"B","name":"3号館","aliases":["三号館"],"pin":3},
-  {"id":"C","name":"4号館","aliases":["四号館"],"pin":4},
-  {"id":"D","name":"5号館","aliases":["五号館"],"pin":5},
-  {"id":"E","name":"6号館","aliases":["六号館"],"pin":6},
-  {"id":"F","name":"7号館","aliases":["七号館"],"pin":7},
-  {"id":"H","name":"レストラン棟","aliases":["レストラン","食堂","学食"],"pin":8}
+  {"id":"C","name":"4号館","aliases":["四号館"],"pin":null},
+  {"id":"D","name":"5号館","aliases":["五号館"],"pin":4},
+  {"id":"E","name":"6号館","aliases":["六号館"],"pin":5},
+  {"id":"F","name":"7号館","aliases":["七号館"],"pin":6},
+  {"id":"H","name":"レストラン棟","aliases":["レストラン","食堂","学食"],"pin":null}
 ]

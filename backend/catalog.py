@@ -6,7 +6,8 @@ import unicodedata
 from datetime import date
 from pathlib import Path
 
-PIN_MAP = {"A": 2, "B": 3, "C": 4, "D": 5, "E": 6, "F": 7, "H": 8}
+# 実装担当者から確認できた配線だけを登録する。Noneは実機点灯を保留する施設。
+PIN_MAP = {"A": 2, "B": 3, "C": None, "D": 4, "E": 5, "F": 6, "H": None}
 
 
 def normalize(value: str) -> str:
@@ -67,7 +68,7 @@ class Catalog:
     def search(self, query: str):
         key = normalize(query)
         if not key:
-            return self.buildings, "案内できる7施設を表示しています。"
+            return self.buildings, "7施設を表示しています。実機LEDは配線確認済みの5施設に対応しています。"
         room = self.rooms.get(room_key(query))
         if room:
             return [self.by_id[room["building_id"]]], f"確認済み教室「{room['number']}」の建物です。"

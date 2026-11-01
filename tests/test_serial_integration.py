@@ -106,15 +106,15 @@ class SerialIntegrationTests(unittest.TestCase):
         expected = [int(pin == selected) for pin in range(2, 9)]
         self.assertEqual(pins, expected)
 
-    def test_connection_resets_and_turns_all_seven_outputs_off(self):
+    def test_connection_resets_and_turns_confirmed_outputs_off(self):
         self.assertPins()
         state = self.client.get("/api/status").json["status"]
         self.assertEqual(state["mode"], "real")
         self.assertTrue(state["connected"])
         self.assertEqual(state["led_state"], "off")
 
-    def test_all_buildings_and_off_through_api_and_real_serial(self):
-        for key, pin in zip("ABCDEFH", range(2, 9)):
+    def test_confirmed_buildings_and_off_through_api_and_real_serial(self):
+        for key, pin in zip("ABDEF", range(2, 7)):
             with self.subTest(building=key, pin=pin):
                 response = self.client.post("/api/select", json={"building_id": key})
                 self.assertEqual(response.status_code, 200, response.json)
@@ -131,12 +131,12 @@ class SerialIntegrationTests(unittest.TestCase):
         self.assertIn("変化", state["notice"])
 
     def test_status_heartbeat_keeps_selected_output_on(self):
-        self.client.post("/api/select", json={"building_id": "H"})
+        self.client.post("/api/select", json={"building_id": "F"})
         for _ in range(5):
             self.board.control("ADVANCE 8000")
             state = self.client.get("/api/status").json["status"]
-            self.assertEqual(state["active_building"], "H")
-            self.assertPins(8)
+            self.assertEqual(state["active_building"], "F")
+            self.assertPins(6)
 
     def test_invalid_wire_input_does_not_change_selected_output(self):
         self.client.post("/api/select", json={"building_id": "A"})
@@ -163,8 +163,8 @@ class SerialIntegrationTests(unittest.TestCase):
         response = self.client.post("/api/connection", json={})
         self.assertEqual(response.status_code, 200, response.json)
         self.assertPins()
-        self.client.post("/api/select", json={"building_id": "H"})
-        self.assertPins(8)
+        self.client.post("/api/select", json={"building_id": "F"})
+        self.assertPins(6)
 
     def test_stale_connection_can_be_replaced_without_status_poll(self):
         self.client.post("/api/select", json={"building_id": "A"})
@@ -194,14 +194,27 @@ class SerialIntegrationTests(unittest.TestCase):
         self.client.post("/api/select", json={"building_id": "H"})
         self.assertPins()
         self.client.post("/api/mode", json={"mode": "real"})
-        self.client.post("/api/select", json={"building_id": "C"})
+        self.client.post("/api/select", json={"building_id": "D"})
         self.assertPins(4)
         self.controller.close()
         self.assertPins()
 
     def test_repeated_selections_keep_ack_and_outputs_in_sync(self):
-        for key in "ABCDEFH" * 20:
+        for key in "ABDEF" * 28:
             response = self.client.post("/api/select", json={"building_id": key})
             self.assertEqual(response.status_code, 200, response.json)
             self.assertEqual(response.json["status"]["active_building"], key)
-        self.assertPins(8)
+        self.assertPins(6)
+
+    def test_unconfirmed_buildings_cannot_light_a_different_building(self):
+        self.client.post("/api/select", json={"building_id": "D"})
+        for key in "CH":
+            with self.subTest(building=key):
+                response = self.client.post("/api/select", json={"building_id": key})
+                self.assertEqual(response.status_code, 400)
+                self.assertIn("未確認", response.json["error"])
+                self.assertPins(4)
+                wire = self.controller._serial
+                wire.write((key + "\n").encode("ascii"))
+                self.assertEqual(wire.read_until(b"\n"), b"ERR:INVALID\r\n")
+                self.assertPins(4)

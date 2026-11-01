@@ -84,12 +84,12 @@ class LedController:
             if not overlong:
                 pending.extend(chunk)
             if chunk.endswith(b"\n"):
-                if not overlong and pending in (b"READY:CAMPUS:1\n", b"READY:CAMPUS:1\r\n"):
+                if not overlong and pending in (b"READY:CAMPUS:2\n", b"READY:CAMPUS:2\r\n"):
                     return
                 # 長すぎる行はLFまで破棄する。途中の識別子だけを受理しない。
                 pending.clear()
                 overlong = False
-        self._fail("ファームウェアの起動通知を確認できません。書き込み・9600bps・RESETを確認してください。")
+        self._fail("配線設定v2の起動通知を確認できません。最新スケッチの書き込み・9600bps・RESETを確認してください。")
 
     def _exchange(self, command):
         if self._serial is None or not self._serial.is_open:
@@ -101,7 +101,8 @@ class LedController:
                 raise ControllerError("コマンドを最後まで送信できませんでした。")
             response = self._read_line()
             if command == "?":
-                if response not in {f"STATE:{c}" for c in (*PIN_MAP, "0")}:
+                wired = [key for key, pin in PIN_MAP.items() if pin is not None]
+                if response not in {f"STATE:{c}" for c in (*wired, "0")}:
                     raise ControllerError(f"Arduinoの状態応答が不正です: {response}")
                 return response[-1]
             if response != f"OK:{command}":
@@ -152,6 +153,8 @@ class LedController:
         if building_id not in PIN_MAP and building_id != "0":
             raise ValueError("対象外の建物です。")
         with self._lock:
+            if self.mode == "real" and building_id != "0" and PIN_MAP[building_id] is None:
+                raise ValueError("この施設の接続先ピンは未確認です。実機LEDの点灯は保留しています。")
             if self.mode == "real":
                 self._exchange(building_id)
             self._active = None if building_id == "0" else building_id

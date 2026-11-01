@@ -20,7 +20,7 @@
   <main>
     <section class="intro" aria-labelledby="page-title">
       <div><p class="eyebrow">WELCOME TO AOMORI UNIVERSITY</p><h1 id="page-title">はじめての青大を、<span>迷わず。</span></h1><p class="intro-text">行きたい場所を探してみましょう。<br>画面の地図と、キャンパス模型の光がご案内します。</p></div>
-      <div class="how-to"><span class="how-icon" aria-hidden="true">↗</span><p><strong>探す。選ぶ。光でわかる。</strong><span>建物を選ぶと、その場所のLEDが点灯します。</span></p></div>
+      <div class="how-to"><span class="how-icon" aria-hidden="true">↗</span><p><strong>探す。選ぶ。光でわかる。</strong><span>配線確認済みの建物は、模型のLEDでもご案内します。</span></p></div>
     </section>
 
     <div id="mode-banner" class="mode-banner" role="status">接続状態を確認しています。</div>
@@ -39,13 +39,13 @@
         <p id="search-message" class="search-message" role="status">施設情報を読み込んでいます。</p>
         <div id="building-list" class="building-list"></div>
         <p id="empty-results" class="empty-results" hidden>教室情報は未登録の場合があります。<br>建物名で検索してください。</p>
-        <div class="finder-note"><span aria-hidden="true">ⓘ</span><p>2号館・図書館新館・体育館は<br>LED案内の対象外です。</p></div>
+        <div class="finder-note"><span aria-hidden="true">ⓘ</span><p>LED対応：1・3・5・6・7号館。<br>4号館・レストラン棟は配線確認中です。<br>2号館・図書館新館・体育館はLED案内の対象外です。</p></div>
       </aside>
 
       <section class="panel map-panel" aria-labelledby="map-title">
         <div class="map-heading"><div class="section-heading"><span class="step">02</span><h2 id="map-title">地図で場所を確認</h2></div><span class="map-hint"><span class="legend-dot"></span>記号を押して選択</span></div>
         <div class="map-wrap"><div id="campus-map" class="campus-map"><img id="map-image" alt="青森大学の公式キャンパスマップ。Aが1号館、Bが3号館、Cが4号館、Dが5号館、Eが6号館、Fが7号館、Hがレストラン棟。" width="1024" height="765" hidden><div id="markers"></div></div><p id="map-loading" class="map-loading">地図を読み込んでいます。</p></div>
-        <div class="map-credit"><span>キャンパス内の7施設をご案内</span><a id="map-source" href="https://www.aomori-u.ac.jp/access/" target="_blank" rel="noopener noreferrer">地図画像：青森大学 ↗</a></div>
+        <div class="map-credit"><span>地図7施設 · 実機LED5施設</span><a id="map-source" href="https://www.aomori-u.ac.jp/access/" target="_blank" rel="noopener noreferrer">地図画像：青森大学 ↗</a></div>
         <div class="destination" aria-live="polite"><span id="destination-symbol" class="destination-symbol" aria-hidden="true">↗</span><div class="destination-copy"><p class="eyebrow">YOUR DESTINATION</p><h3 id="destination-name">行き先を選んでください</h3><p id="destination-detail">一覧または地図の記号から選択できます。</p></div><span id="led-indicator" class="led-indicator">未選択</span></div>
         <div class="map-actions"><p id="led-summary">物理LEDの状態はまだ確認できていません。</p><button id="all-off" class="secondary-button" type="button" data-control><span aria-hidden="true">○</span> すべて消灯</button></div>
       </section>
