@@ -2,6 +2,8 @@
 
 青森大学「プログラミングワークショップⅡ」で制作する、WebとArduino Uno R3を連携したキャンパス案内です。建物名・確認済みの教室番号から施設を探し、公式マップと実物模型のLEDで案内します。
 
+**グループの方へ：GitHubアカウントなしで閲覧・ダウンロードできます。** [ZIPをダウンロード](https://github.com/880null/aomoriuniv-campus-guide/archive/refs/heads/main.zip)して展開してください。[初めて使う人向けの手順](docs/GROUP_GUIDE.md)に、Windows／Macの起動方法とArduinoなしで試す方法をまとめています。
+
 ## できること
 - 14施設の一覧・建物名／施設名／確認済み番号の検索、地図13マーカーからの選択
 - 369地点（番号付き155室を含む）の階別一覧、出典・該当ページの案内図表示
@@ -66,7 +68,7 @@ USB接続はPythonが管理し、ブラウザからArduinoへ直接接続するW
 
 ## GitHubからダウンロードして使う
 
-1. [GitHubリポジトリ](https://github.com/880null/aomoriuniv-campus-guide)にログインし、「Code → Download ZIP」で取得して展開します。Gitのインストールは不要です。
+1. [ZIPをダウンロード](https://github.com/880null/aomoriuniv-campus-guide/archive/refs/heads/main.zip)して、フォルダー全体を展開します。GitHubページの「Code → Download ZIP」からも取得できます。GitHubへのログインとGitのインストールは不要です。
 2. PCにPython 3.10以上を用意します。初回の基板書き込み用にArduino IDE 2も用意します。
 3. `firmware/CampusGuide/CampusGuide.ino`をArduino IDEで開き、ボード「Arduino Uno」とUSBポートを選んで「書き込み」を押します。
 4. Arduino IDEのシリアルモニターを閉じます。
@@ -264,7 +266,7 @@ OS用の起動ファイル・初回セットアップ・検索・模擬点灯・
 
 ## Git / GitHub
 
-GitHubの保存先は非公開リポジトリ [880null/aomoriuniv-campus-guide](https://github.com/880null/aomoriuniv-campus-guide) です。`origin`から`main`ブランチを管理します。`.venv/`、Pythonキャッシュ、`.pio/`、秘密情報、OS一時ファイルを除外しています。
+GitHubの保存先は公開リポジトリ [880null/aomoriuniv-campus-guide](https://github.com/880null/aomoriuniv-campus-guide) です。`origin`から`main`ブランチを管理します。`.venv/`、Pythonキャッシュ、`.pio/`、秘密情報、OS一時ファイルを除外しています。
 
 変更を保存してGitHubに反映する場合:
 
