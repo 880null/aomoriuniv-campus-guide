@@ -223,4 +223,4 @@ Flash: 2458 / 32256 bytes
 
 ## Mac / Windowsの検証追加（2026-11-02）
 
-Mac実環境でOS起動ファイル、初回準備、日本語・空白入りパス、実HTTP、Chromium／WebKitの画面操作、未接続、オフライン再起動、終了を検査し成功した。Windows用CIは作成したが、GitHub認証のworkflow権限不足で未実行。詳細と確認限界は[PLATFORM_VALIDATION.md](PLATFORM_VALIDATION.md)、Macの結果は[JSON](platform-results/macos-arm64-2026-11-02.json)を参照。
+Mac実環境でOS起動ファイル、初回準備、日本語・空白入りパス、実HTTP、Chromium／WebKitの画面操作、未接続、オフライン再起動、終了を検査し成功した。当初Windows用CIは認証のworkflow権限不足で未実行だったが、追加認証後に実行できた。2026-11-02の[実行41379844775](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41379844775)で、Mac Intel／ARM64とWindows Server 2025の計4ジョブが成功した。Windowsでも初回準備・start.bat・Chromium／Edge・オフライン再起動とUnoビルドが成功。WindowsのPythonテストは54件成功・POSIX限定11件スキップ。Arduino実機とダブルクリック・既定ブラウザの自動起動は未確認。詳細と確認限界は[PLATFORM_VALIDATION.md](PLATFORM_VALIDATION.md)、Macの結果は[JSON](platform-results/macos-arm64-2026-11-02.json)を参照。

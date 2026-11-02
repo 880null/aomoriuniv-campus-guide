@@ -1,0 +1,28 @@
+{
+  "os": "macOS-15.7.9-x86_64-i386-64bit",
+  "machine": "x86_64",
+  "python": "3.10.21",
+  "timestamp_utc": "2026-11-02T02:51:22.801617+00:00",
+  "checks": [
+    {
+      "case": "fresh environment preparation through OS launcher",
+      "result": "passed"
+    },
+    {
+      "case": "Japanese and spaced directory / HTTP / simulation",
+      "result": "passed"
+    },
+    {
+      "case": "offline restart / disconnected real mode / HTTP available",
+      "result": "passed"
+    }
+  ],
+  "result": "passed",
+  "limits": [
+    "Arduino実機・配線は未検証",
+    "Finder/Explorerのダブルクリックは未検証",
+    "既定ブラウザの自動起動は未検証（--no-browserで検査）"
+  ],
+  "app_python": "3.10.21",
+  "shutdown": "SIGINT / Ctrl+C equivalent"
+}

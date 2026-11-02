@@ -4,6 +4,15 @@
 
 **グループの方へ：GitHubアカウントなしで閲覧・ダウンロードできます。** [ZIPをダウンロード](https://github.com/880null/aomoriuniv-campus-guide/archive/refs/heads/main.zip)して展開してください。[初めて使う人向けの手順](docs/GROUP_GUIDE.md)に、Windows／Macの起動方法とArduinoなしで試す方法をまとめています。
 
+<details>
+<summary>画面の例を見る（シミュレーション）</summary>
+
+![WindowsのEdgeで5301教室を検索し、5号館を模擬点灯している画面](docs/screenshots/campus-guide.png)
+
+Windowsの検証環境で撮影した画面です。実機LEDの点灯写真ではありません。
+
+</details>
+
 ## できること
 - 14施設の一覧・建物名／施設名／確認済み番号の検索、地図13マーカーからの選択
 - 369地点（番号付き155室を含む）の階別一覧、出典・該当ページの案内図表示
@@ -242,11 +251,11 @@ npm --prefix tests test
 
 Node.jsは`tests/package.json`のenginesを満たす版を使用します。Python仮想環境を準備してから実行してください。別のPythonを使用する場合は`CAMPUS_TEST_PYTHON`で指定できます。jsdom上の実際の画面コードとFlask APIを接続し、番号検索・階別一覧・出典リンク・同名室・非LED施設への移動時の消灯・未接続エラーを検査します。ブラウザの描画や実機USBの検証とは区別します。
 
-確認できた範囲と、実機・OSごとの未確認項目は[検証記録](docs/VALIDATION.md)にまとめています。実際のLED、USB切断・再接続、Windowsの起動は、展示用機材で受入確認してください。
+確認できた範囲と、実機・OSごとの未確認項目は[検証記録](docs/VALIDATION.md)にまとめています。実際のLED、USB切断・再接続、起動ファイルのダブルクリックと既定ブラウザの自動表示は、展示用機材で受入確認してください。
 
 ## Mac / Windowsの検証
 
-OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。GitHub ActionsでWindows・Macの検証を実行します。成功した環境・対象コミット・確認限界は検証記録へ記載します。
+OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。2026-11-02の[GitHub Actions実行](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41379844775)で、Mac（Intel／ARM64）とWindows Server 2025の4環境すべて成功しました。WindowsではChromium／Edge、Mac ARM64ではChromium／WebKitの画面操作も確認しました。Arduino実機のUSB・配線・点灯は未確認です。
 
 ## 困ったとき
 

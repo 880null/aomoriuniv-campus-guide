@@ -1,0 +1,38 @@
+{
+  "os": "Windows-2025Server-10.0.26100-SP0",
+  "machine": "AMD64",
+  "python": "3.13.16",
+  "timestamp_utc": "2026-11-02T02:51:53.530647+00:00",
+  "checks": [
+    {
+      "case": "fresh environment preparation through OS launcher",
+      "result": "passed"
+    },
+    {
+      "case": "Japanese and spaced directory / HTTP / simulation",
+      "result": "passed"
+    },
+    {
+      "browser": "chromium",
+      "result": "passed",
+      "uncaught_errors": []
+    },
+    {
+      "browser": "msedge",
+      "result": "passed",
+      "uncaught_errors": []
+    },
+    {
+      "case": "offline restart / disconnected real mode / HTTP available",
+      "result": "passed"
+    }
+  ],
+  "result": "passed",
+  "limits": [
+    "Arduino実機・配線は未検証",
+    "Finder/Explorerのダブルクリックは未検証",
+    "既定ブラウザの自動起動は未検証（--no-browserで検査）"
+  ],
+  "app_python": "3.13.16",
+  "shutdown": "process-tree termination"
+}

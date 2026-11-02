@@ -2,22 +2,40 @@
 
 確認日: 2026-11-02。実際に実行した環境と、準備しただけの検証を区別する。
 
-## 今回の実行環境
+## 今回の実行環境と結果
 
-| 項目 | Mac（手元の実環境） | Windows |
-| --- | --- | --- |
-| OS / CPU | macOS 27.2 / Apple Silicon ARM64 | このPCに実行環境なし |
-| Python | 3.15.2 | CIでは3.10 / 3.13を予定 |
-| 起動ファイル | `start.command`をzshから実行 | `start.bat`の検証を準備済み、未実行 |
-| 初回セットアップ | 新しい日本語・空白入りフォルダーで仮想環境・依存関係を準備 | 未実行 |
-| ブラウザ | 検証用Chromium / WebKitで画面操作に成功 | CIでChromium / Microsoft Edgeを予定 |
-| Finder / Explorerのダブルクリック | 未確認 | 未確認 |
-| 既定ブラウザの自動起動 | 今回は`--no-browser`のため未確認 | 未確認 |
-| Arduino実機のUSB・配線・LED | 未確認 | 未確認 |
+[GitHub Actionsの実行](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41379844775)で4ジョブすべて成功。対象コミットは`2b88f2ca5c7e0fa4742ca79f30c60d5562e0b50b`。その後の変更は共有用のREADME・手順・検証資料で、アプリの実装は同じ。
 
-GitHub CLIの追加認証を完了し、GitHub Actionsの実OS上でWindows・Macの検証を実行する。**実行結果が出るまでは、Windowsで実行成功したとは扱わない。**
+| 実行環境 | Python | 起動・HTTP・模擬点灯・未接続・オフライン再起動 | ブラウザ操作 | Unoビルド |
+| --- | --- | --- | --- | --- |
+| macOS 15.7.9 / Intel x86_64（CI） | 3.10.21 | 成功 | このジョブでは対象外 | このジョブでは対象外 |
+| macOS 26.6.2 / ARM64（CI） | 3.13.17 | 成功 | Chromium / WebKit成功 | 成功 |
+| Windows Server 2025 / x64（CI） | 3.10.11 | 成功 | このジョブでは対象外 | このジョブでは対象外 |
+| Windows Server 2025 / x64（CI） | 3.13.16 | 成功 | Chromium / Microsoft Edge成功 | 成功 |
+| macOS 27.2 / Apple Silicon（手元） | 3.15.2 | 成功 | Chromium / WebKit成功 | 成功 |
 
-今回のMac検証は全項目成功。Python自動テスト65件、DOM結合テスト3件、PlatformIOのUnoビルドも成功（RAM 208 / 2048 bytes、Flash 2458 / 32256 bytes）。[実行結果JSON](platform-results/macos-arm64-2026-11-02.json)を同梱する。ブラウザ操作にはヘッドレスの検証用エンジンを使用しており、市販Safariアプリそのものの手動操作ではない。
+CIの全ジョブでDOM結合テスト3件が成功。PythonテストはMacで65件成功、Windowsで54件成功・POSIX仮想ポートを使う11件をスキップした。WindowsのC++模擬ファームウェアの論理テストは成功している。UnoビルドはMac・Windowsの両方でRAM 208 / 2048 bytes、Flash 2458 / 32256 bytes。ビルド成功は基板への書き込み・点灯の確認とは区別する。
+
+初回セットアップは、新しい日本語・空白入りフォルダーへコピーし、Macは`start.command`、Windowsは`start.bat`を実行して確認した。Python 3.10でも実際に仮想環境を作成し、依存関係の準備と再起動に成功した。
+
+実行時に保存された結果JSON:
+
+- [Mac Intel / Python 3.10](platform-results/ci-41379844775-macos-intel-py310.json)
+- [Mac ARM64 / Python 3.13](platform-results/ci-41379844775-macos-arm64-py313.json)
+- [Windows / Python 3.10](platform-results/ci-41379844775-windows-py310.json)
+- [Windows / Python 3.13](platform-results/ci-41379844775-windows-py313.json)
+- [手元のMac / Python 3.15](platform-results/macos-arm64-2026-11-02.json)
+
+WindowsのPython 3.10の`platform.platform()`は`Windows-10-10.0.26100-SP0`と表示するが、ジョブ開始ログのOS情報は両WindowsジョブともMicrosoft Windows Server 2025 / 10.0.26100 / Datacenter。Windows 10の実機で検査したという意味ではない。
+
+## 確認の限界
+
+- Arduino実機のUSB認識・DTRリセット・書き込み・配線・LED点灯は、両OSとも未確認。
+- Finder / Explorerでの起動ファイルのダブルクリックは未確認。コマンド経由でOS用起動ファイルを実行した。
+- 既定ブラウザの自動起動は、`--no-browser`で検査したため未確認。
+- ブラウザはヘッドレスでの検証。WebKitは市販Safariアプリそのものの手動操作ではない。
+- Windows Server上のCIであり、グループ各自のWindows 10 / 11実機、USBドライバー、ウイルス対策や組織の制限は未確認。
+- Windowsでは子プロセスを含めた終了を検査し、利用者のCtrl+C操作は未確認。
 
 ## 実行する検査
 
@@ -66,7 +84,7 @@ Macでは`python -m playwright install webkit`を追加し、`--browser webkit`�
 - Windows / Python 3.10
 - Windows / Python 3.13（Chromium / EdgeとUnoビルドも検査）
 
-各ジョブでPythonテスト、JavaScript構文、公式データの再生成一致、DOM結合テスト、OS用起動ファイルを検証する。WindowsではPOSIX仮想シリアルの11テストは環境要件によりスキップされる。スキップを実機通信の成功とは扱わない。
+各ジョブでPythonテスト、JavaScript構文、公式データの再生成一致、DOM結合テスト、OS用起動ファイルを検証する。WindowsではPOSIX仮想シリアルの11テストは環境要件によりスキップされる。スキップを実機通信の成功とは扱わない。今回のジョブログと成果物（保存期間14日）には画面画像と起動ログも残す。[READMEの画面例](screenshots/campus-guide.png)はWindowsのEdgeで撮影したシミュレーションの画像。
 
 GitHub CLIの追加認証が必要な場合のコマンド:
 

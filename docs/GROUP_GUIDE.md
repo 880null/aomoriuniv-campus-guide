@@ -9,6 +9,10 @@ GitHubアカウントもGitのインストールも不要です。説明はGitHu
 
 ZIPをダウンロードし、フォルダー全体を展開してください。WindowsではZIPを右クリックして「すべて展開」、MacではZIPをダブルクリックします。WindowsではZIPの中から直接起動せず、展開後のフォルダーを使います。
 
+## 画面の例
+
+[5301教室を検索した画面を見る（シミュレーション）](screenshots/campus-guide.png)。WindowsのEdgeによる自動検証で撮影しました。
+
 ## Arduinoがなくても画面を試せる
 
 1. [Python公式サイト](https://www.python.org/downloads/)からPython 3.10以上をインストールします。初回の準備時はインターネット接続が必要です。
