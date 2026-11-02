@@ -244,7 +244,7 @@ Node.jsは`tests/package.json`のenginesを満たす版を使用します。Pyth
 
 ## Mac / Windowsの検証
 
-OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。Windowsの実行はGitHub認証の`workflow`権限不足でまだ開始できていません。
+OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。GitHub ActionsでWindows・Macの検証を実行します。成功した環境・対象コミット・確認限界は検証記録へ記載します。
 
 ## 困ったとき
 

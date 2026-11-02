@@ -15,7 +15,7 @@
 | 既定ブラウザの自動起動 | 今回は`--no-browser`のため未確認 | 未確認 |
 | Arduino実機のUSB・配線・LED | 未確認 | 未確認 |
 
-Windows検証はGitHub Actionsの実OS上で行う構成を作成したが、現在のGitHub CLI認証に`workflow`スコープがないため、GitHubがワークフローのPushを拒否した。**Windowsで実行成功したとは扱わない。**
+GitHub CLIの追加認証を完了し、GitHub Actionsの実OS上でWindows・Macの検証を実行する。**実行結果が出るまでは、Windowsで実行成功したとは扱わない。**
 
 今回のMac検証は全項目成功。Python自動テスト65件、DOM結合テスト3件、PlatformIOのUnoビルドも成功（RAM 208 / 2048 bytes、Flash 2458 / 32256 bytes）。[実行結果JSON](platform-results/macos-arm64-2026-11-02.json)を同梱する。ブラウザ操作にはヘッドレスの検証用エンジンを使用しており、市販Safariアプリそのものの手動操作ではない。
 
@@ -59,7 +59,7 @@ Macでは`python -m playwright install webkit`を追加し、`--browser webkit`�
 
 ## GitHub Actionsで再現する
 
-[docs/testing/cross-platform.yml](testing/cross-platform.yml)に、認証後に有効化するワークフローテンプレートとして次の4ジョブを用意した。現在は実行されない資料ファイルであり、`.github/workflows/`には配置していない。
+[.github/workflows/cross-platform.yml](../.github/workflows/cross-platform.yml)で、次の4ジョブを実行する。
 
 - macOS Intel / Python 3.10
 - macOS ARM64 / Python 3.13（Chromium / WebKitとUnoビルドも検査）
@@ -74,4 +74,4 @@ GitHub CLIの追加認証が必要な場合のコマンド:
 gh auth refresh -h github.com -s workflow
 ```
 
-認証後はテンプレートを`.github/workflows/cross-platform.yml`へ移動してコミット・Pushすると自動実行する。必要に応じてActionsの「Cross-platform verification」から手動実行もできる。終了後は各OSのジョブログと`verification-*`成果物を確認する。**ワークフローがあるだけでは検証完了ではない。成功した実行URLと対象コミットを記録して初めて、その環境での成功とする。**
+関連ファイルをコミット・Pushすると自動実行する。必要に応じてActionsの「Cross-platform verification」から手動実行もできる。終了後は各OSのジョブログと`verification-*`成果物を確認する。**ワークフローがあるだけでは検証完了ではない。成功した実行URLと対象コミットを記録して初めて、その環境での成功とする。**
