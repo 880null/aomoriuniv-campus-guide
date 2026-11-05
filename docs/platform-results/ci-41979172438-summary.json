@@ -1,0 +1,137 @@
+{
+  "conclusion": "success",
+  "databaseId": 41979172438,
+  "headSha": "62ec0b6c7a6526b756aef846335ee7ccac9bf50e",
+  "jobs": [
+    {
+      "checks": [
+        {
+          "conclusion": "success",
+          "name": "Python, firmware logic and simulated serial tests"
+        },
+        {
+          "conclusion": "success",
+          "name": "DOM integration tests"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Launch-file and HTTP verification (Python 3.10)"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "macOS launch-file and Chromium / WebKit verification"
+        },
+        {
+          "conclusion": "success",
+          "name": "Windows launch-file and Chromium / Edge verification"
+        },
+        {
+          "conclusion": "success",
+          "name": "Compile Uno firmware"
+        }
+      ],
+      "conclusion": "success",
+      "name": "windows-latest / Python 3.13",
+      "status": "completed",
+      "url": "https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41979172438/job/127085013604"
+    },
+    {
+      "checks": [
+        {
+          "conclusion": "success",
+          "name": "Python, firmware logic and simulated serial tests"
+        },
+        {
+          "conclusion": "success",
+          "name": "DOM integration tests"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Launch-file and HTTP verification (Python 3.10)"
+        },
+        {
+          "conclusion": "success",
+          "name": "macOS launch-file and Chromium / WebKit verification"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Windows launch-file and Chromium / Edge verification"
+        },
+        {
+          "conclusion": "success",
+          "name": "Compile Uno firmware"
+        }
+      ],
+      "conclusion": "success",
+      "name": "macos-latest / Python 3.13",
+      "status": "completed",
+      "url": "https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41979172438/job/127085013664"
+    },
+    {
+      "checks": [
+        {
+          "conclusion": "success",
+          "name": "Python, firmware logic and simulated serial tests"
+        },
+        {
+          "conclusion": "success",
+          "name": "DOM integration tests"
+        },
+        {
+          "conclusion": "success",
+          "name": "Launch-file and HTTP verification (Python 3.10)"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "macOS launch-file and Chromium / WebKit verification"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Windows launch-file and Chromium / Edge verification"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Compile Uno firmware"
+        }
+      ],
+      "conclusion": "success",
+      "name": "windows-latest / Python 3.10",
+      "status": "completed",
+      "url": "https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41979172438/job/127085013674"
+    },
+    {
+      "checks": [
+        {
+          "conclusion": "success",
+          "name": "Python, firmware logic and simulated serial tests"
+        },
+        {
+          "conclusion": "success",
+          "name": "DOM integration tests"
+        },
+        {
+          "conclusion": "success",
+          "name": "Launch-file and HTTP verification (Python 3.10)"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "macOS launch-file and Chromium / WebKit verification"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Windows launch-file and Chromium / Edge verification"
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Compile Uno firmware"
+        }
+      ],
+      "conclusion": "success",
+      "name": "macos-15-intel / Python 3.10",
+      "status": "completed",
+      "url": "https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41979172438/job/127085013784"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41979172438"
+}

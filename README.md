@@ -255,7 +255,7 @@ Node.jsは`tests/package.json`のenginesを満たす版を使用します。Pyth
 
 ## Mac / Windowsの検証
 
-OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。2026-11-02の[GitHub Actions実行](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41379844775)で、Mac（Intel／ARM64）とWindows Server 2025の4環境すべて成功しました。WindowsではChromium／Edge、Mac ARM64ではChromium／WebKitの画面操作も確認しました。2026-11-05にD2〜D6の5施設・通信v4へ更新し、Macで実機への書き込み・USB接続・Web APIの命令応答を確認しました。発光・配線の最終確認状況は[実機検証記録](docs/HARDWARE_VALIDATION_2026-11-05.md)を参照してください。以前のCIはv3の結果です。
+OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。2026-11-02の[GitHub Actions実行](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41379844775)で、Mac（Intel／ARM64）とWindows Server 2025の4環境すべて成功しました。WindowsではChromium／Edge、Mac ARM64ではChromium／WebKitの画面操作も確認しました。2026-11-05にD2〜D6の5施設・通信v4へ更新し、Macで実機への書き込み・USB接続・Web APIの命令応答を確認しました。発光・配線の最終確認状況は[実機検証記録](docs/HARDWARE_VALIDATION_2026-11-05.md)を参照してください。[v4のCI実行](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41979172438)も4環境すべて成功しています。
 
 ## 困ったとき
 

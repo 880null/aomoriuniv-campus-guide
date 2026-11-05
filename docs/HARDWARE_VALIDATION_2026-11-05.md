@@ -22,3 +22,7 @@ MacにUSB接続したUno互換基板を検出し、Arduino CLIでも`arduino:avr
 ## 今回の起動方法
 
 OneDrive内の`.venv`でFlaskの読み込みが長時間待ちになったため、ソースと依存関係を同期対象外のローカル一時フォルダーへ用意して起動した。元のプロジェクトと仮想環境は保持している。起動中のWebアプリは`http://127.0.0.1:5050/`、実機モード。
+
+## 更新後のOS検証
+
+[GitHub Actions実行41979172438](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41979172438)は、対象コミット`62ec0b6c7a6526b756aef846335ee7ccac9bf50e`で4ジョブすべて成功。Mac Intel／ARM64、WindowsのPython 3.10／3.13の起動・HTTP・DOMを検査し、Python 3.13の両OSでブラウザ操作とPlatformIOのUnoビルドも成功した。[結果の要約JSON](platform-results/ci-41979172438-summary.json)を同梱する。Windowsでの実基板USB検証を行ったものではない。
