@@ -1,0 +1,47 @@
+{
+  "timestamp_utc": "2026-11-05T06:05:26.902591+00:00",
+  "protocol": 4,
+  "path": "HTTP -> Flask -> pySerial -> real Uno",
+  "port": "/dev/cu.usbmodem1101",
+  "cases": [
+    {
+      "building_id": "A",
+      "pin": 2,
+      "ack_and_state": "passed"
+    },
+    {
+      "building_id": "B",
+      "pin": 3,
+      "ack_and_state": "passed"
+    },
+    {
+      "building_id": "D",
+      "pin": 4,
+      "ack_and_state": "passed"
+    },
+    {
+      "building_id": "E",
+      "pin": 5,
+      "ack_and_state": "passed"
+    },
+    {
+      "building_id": "F",
+      "pin": 6,
+      "ack_and_state": "passed"
+    }
+  ],
+  "physical_observation": "User confirmed all five LEDs lit successfully after correcting a circuit connection; connection fault was the cause.",
+  "final_state": {
+    "active_building": null,
+    "connected": true,
+    "error": null,
+    "led_state": "off",
+    "mode": "real",
+    "notice": null,
+    "port": "/dev/cu.usbmodem1101"
+  },
+  "os": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "python": "3.15.2",
+  "firmware_upload": "Arduino CLI upload completed successfully; normal read-back verification enabled",
+  "physical_observation_source": "User report in this session on 2026-11-05"
+}

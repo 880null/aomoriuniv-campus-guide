@@ -3,10 +3,10 @@
 // Arduino IDEとPlatformIOで共通の実装を使用する。
 
 namespace {
-// 1号館D2 / 3号館D3 / 5号館D4 / 6号館D5 / 7号館D6 / レストラン棟D7（仮設定）。
-// 4号館(C)はLED未実装のため制御しない。
-const char BUILDINGS[] = {'A', 'B', 'D', 'E', 'F', 'H'};
-const uint8_t LED_PINS[] = {2, 3, 4, 5, 6, 7};
+// 1号館D2 / 3号館D3 / 5号館D4 / 6号館D5 / 7号館D6。
+// 4号館(C)・レストラン棟(H)はLED未実装のため制御しない。
+const char BUILDINGS[] = {'A', 'B', 'D', 'E', 'F'};
+const uint8_t LED_PINS[] = {2, 3, 4, 5, 6};
 const uint8_t LED_COUNT = sizeof(LED_PINS) / sizeof(LED_PINS[0]);
 const unsigned long WATCHDOG_MS = 10000;
 char active = '0';
@@ -65,7 +65,7 @@ void setup() {
   setLeds('0');
   Serial.begin(9600);
   lastCommandAt = millis();
-  Serial.println(F("READY:CAMPUS:3"));
+  Serial.println(F("READY:CAMPUS:4"));
 }
 
 void loop() {

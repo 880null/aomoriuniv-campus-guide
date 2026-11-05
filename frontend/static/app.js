@@ -64,7 +64,7 @@ function renderState() {
   setText(banner, simulation
     ? "シミュレーションモード：画面上で点灯を確認できます。物理LEDへは送信しません。"
     : state.connected
-      ? `実機モード：LED設定済みの${wiredCount}施設を案内します。4号館はLED未実装、レストラン棟はD7に仮設定しています。`
+      ? `実機モード：LED設定済みの${wiredCount}施設を案内します。4号館・レストラン棟はLED未実装です。`
       : "実機モード：Arduinoは未接続です。施設の閲覧はできます。実機がない場合は下の設定でシミュレーションに切り替えてください。");
   document.querySelectorAll('input[name="mode"]').forEach((radio) => {
     radio.checked = radio.value === state.mode;
@@ -288,7 +288,8 @@ async function loadPorts() {
 async function loadMap() {
   const map = await api("/api/map");
   $("map-source").href = map.source_page;
-  setText($("map-count"), `地図${map.markers.length}施設 · 実機LED6施設 · 新・弓は略記`);
+  const wiredCount = buildings.filter((item) => item.pin !== null).length;
+  setText($("map-count"), `地図${map.markers.length}施設 · 実機LED${wiredCount}施設 · 新・弓は略記`);
   const img = $("map-image");
   img.addEventListener("load", () => {
     img.hidden = false;

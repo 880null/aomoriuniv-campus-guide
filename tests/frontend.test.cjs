@@ -141,7 +141,9 @@ test('実機未接続でも教室情報を維持し、点灯成功と表示し�
   assert.equal(ui.$('connection-badge').textContent,'Arduino 未接続');
   assert.equal(ui.$('led-indicator').textContent,'LED状態不明');
   assert.equal(ui.$('destination-evidence').hidden,false);
-  await ui.clickBuilding('C');
-  assert.equal(ui.$('led-indicator').textContent,'画面案内のみ');
-  assert.equal(ui.requests.some(r=>r.path==='/api/select' && r.body.building_id==='C'),false);
+  for (const key of ['C', 'H']) {
+    await ui.clickBuilding(key);
+    assert.equal(ui.$('led-indicator').textContent,'画面案内のみ');
+    assert.equal(ui.requests.some(r=>r.path==='/api/select' && r.body.building_id===key),false);
+  }
 });

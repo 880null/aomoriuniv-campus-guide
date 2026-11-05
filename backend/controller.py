@@ -84,12 +84,12 @@ class LedController:
             if not overlong:
                 pending.extend(chunk)
             if chunk.endswith(b"\n"):
-                if not overlong and pending in (b"READY:CAMPUS:3\n", b"READY:CAMPUS:3\r\n"):
+                if not overlong and pending in (b"READY:CAMPUS:4\n", b"READY:CAMPUS:4\r\n"):
                     return
                 # 長すぎる行はLFまで破棄する。途中の識別子だけを受理しない。
                 pending.clear()
                 overlong = False
-        self._fail("配線設定v3の起動通知を確認できません。最新スケッチの書き込み・9600bps・RESETを確認してください。")
+        self._fail("配線設定v4の起動通知を確認できません。最新スケッチの書き込み・9600bps・RESETを確認してください。")
 
     def _exchange(self, command):
         if self._serial is None or not self._serial.is_open:

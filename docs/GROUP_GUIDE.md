@@ -11,7 +11,7 @@ ZIPをダウンロードし、フォルダー全体を展開してください�
 
 ## 画面の例
 
-[5301教室を検索した画面を見る（シミュレーション）](screenshots/campus-guide.png)。WindowsのEdgeによる自動検証で撮影しました。
+[5301教室を検索した画面を見る（シミュレーション）](screenshots/campus-guide.png)。2026-11-05にMacのChromiumで撮影しました。
 
 ## Arduinoがなくても画面を試せる
 
@@ -41,7 +41,7 @@ Macで実行権限のエラーが出た場合も、上記の`zsh`コマンドで
 
 Arduino Uno R3への初回書き込みにはArduino IDE 2かPlatformIOが必要です。[READMEの初回準備](../README.md#arduinoの初回準備)と[配線図・ピン設定](HARDWARE.md)を確認してください。`.ino`だけでなく、`firmware/CampusGuide/`内のファイルをまとめて使います。
 
-配線は1号館D2、3号館D3、5号館D4、6号館D5、7号館D6、レストラン棟D7（仮設定）です。4号館のLEDは未実装です。実機のUSB通信・配線・点灯の確認状況は[OS別検証記録](PLATFORM_VALIDATION.md)を参照してください。
+配線は1号館D2、3号館D3、5号館D4、6号館D5、7号館D6です。4号館・レストラン棟のLEDは未実装です。v4の最新スケッチを使用してください。実機のUSB通信・配線・点灯の確認状況は[OS別検証記録](PLATFORM_VALIDATION.md)を参照してください。
 
 ## 更新版を受け取る
 

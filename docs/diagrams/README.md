@@ -75,3 +75,7 @@ PLAYWRIGHT_BROWSERS_PATH=/tmp/aomori-diagram-browser /tmp/aomori-diagram-tools/b
 ```
 
 PNG両方を開き、日本語の字形・改行、ロゴの欠落、文字と矢印の重なり、枠からのはみ出しを確認する。配線・通信を変更したときはREADME本文と図を同時に更新する。
+
+## 2026-11-05の配線更新
+
+使用ピンをD2〜D6、建物LEDを5個へ更新し、HTML・明暗のPNGを生成し直した。白いロゴ台座では明暗ともライト用ロゴを使うようにし、両テーマでロゴの表示と5個の表記を目視確認した。

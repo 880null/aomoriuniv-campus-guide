@@ -80,8 +80,8 @@
       "食堂",
       "学食"
     ],
-    "pin": 7,
-    "led_note": "D7に仮設定",
+    "pin": null,
+    "led_note": "LED未実装",
     "source_id": "H",
     "symbol": "H"
   },

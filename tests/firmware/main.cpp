@@ -10,28 +10,30 @@ void send(const std::string &line) {
 }
 
 void expectOnly(int pin) {
-  for (int p = 2; p <= 8; ++p) assert(outputs[p] == (p == pin ? HIGH : LOW));
+  for (int p = 2; p <= 6; ++p) assert(outputs[p] == (p == pin ? HIGH : LOW));
+  assert(outputs[7] == HIGH && outputs[8] == HIGH);  // 未使用ピンは変更しない。
 }
 
 int main() {
+  outputs[7] = outputs[8] = HIGH;
   setup();
   assert(Serial.baud == 9600);
-  assert(Serial.output == "READY:CAMPUS:3\r\n");
-  for (int pin = 2; pin <= 7; ++pin) assert(modes[pin] == OUTPUT);
-  assert(modes[8] != OUTPUT);
+  assert(Serial.output == "READY:CAMPUS:4\r\n");
+  for (int pin = 2; pin <= 6; ++pin) assert(modes[pin] == OUTPUT);
+  assert(modes[7] != OUTPUT && modes[8] != OUTPUT);
   expectOnly(-1);
-  const std::string keys = "ABDEFH";
-  for (int i = 0; i < 6; ++i) {
+  const std::string keys = "ABDEF";
+  for (int i = 0; i < 5; ++i) {
     send(std::string(1, keys[i]) + "\n");
     assert(Serial.output == "OK:" + std::string(1, keys[i]) + "\r\n");
     expectOnly(i + 2);
   }
   send("?\n");
-  assert(Serial.output == "STATE:H\r\n");
+  assert(Serial.output == "STATE:F\r\n");
   send("A\r\n");
   assert(Serial.output == "OK:A\r\n");
   expectOnly(2);
-  for (const auto &line : {"C\n", "G\n", "AB\n", "\n", "A\rB\n", "\rA\n", "a\n"}) {
+  for (const auto &line : {"C\n", "H\n", "G\n", "AB\n", "\n", "A\rB\n", "\rA\n", "a\n"}) {
     send(line);
     assert(Serial.output == "ERR:INVALID\r\n");
     expectOnly(2);

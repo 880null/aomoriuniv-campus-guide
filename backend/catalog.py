@@ -8,7 +8,7 @@ from datetime import date
 from pathlib import Path
 
 # 画面だけで案内する建物を追加しても、ハードウェアの通信契約は変更しない。
-PIN_MAP = {"A": 2, "B": 3, "C": None, "D": 4, "E": 5, "F": 6, "H": 7}
+PIN_MAP = {"A": 2, "B": 3, "C": None, "D": 4, "E": 5, "F": 6, "H": None}
 
 
 def normalize(value: str) -> str:
@@ -130,7 +130,8 @@ class Catalog:
     def search(self, query: str):
         key = normalize(query)
         if not key:
-            return self.buildings, f"{len(self.buildings)}施設・{len(self.destinations)}地点を案内します。実機LEDは6施設です。"
+            wired_count = sum(pin is not None for pin in PIN_MAP.values())
+            return self.buildings, f"{len(self.buildings)}施設・{len(self.destinations)}地点を案内します。実機LEDは{wired_count}施設です。"
         destinations = self.search_destinations(query)
         symbol = self.by_id.get(key.upper())
         if symbol:

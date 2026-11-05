@@ -7,9 +7,9 @@
 <details>
 <summary>画面の例を見る（シミュレーション）</summary>
 
-![WindowsのEdgeで5301教室を検索し、5号館を模擬点灯している画面](docs/screenshots/campus-guide.png)
+![MacのChromiumで5301教室を検索し、5号館を模擬点灯している画面](docs/screenshots/campus-guide.png)
 
-Windowsの検証環境で撮影した画面です。実機LEDの点灯写真ではありません。
+2026-11-05にMacの検証環境で撮影した画面です。実機LEDの点灯写真ではありません。
 
 </details>
 
@@ -32,7 +32,7 @@ Windowsの検証環境で撮影した画面です。実機LEDの点灯写真で�
   <img src="docs/diagrams/campus-guide.png" alt="キャンパスガイドの構成図。HTML・CSS・JavaScriptのブラウザ画面からFetchでWaitressとFlaskへ接続し、pySerialがUSBでArduino Uno R3へ命令を送り、建物LEDを点灯する。JSONと地図・PDFをPC内に保持し、シミュレーションではUSBへ送信しない。開発にはVS Code、PlatformIOまたはArduino IDE、C++、Git、GitHubを使う。" width="1120">
 </picture>
 
-青線は利用時の通信、灰色の実線はデータ参照・模擬動作、点線は開発・書き込みの関係です。LEDは現在の設定上6施設で、レストラン棟のD7は仮設定です。
+青線は利用時の通信、灰色の実線はデータ参照・模擬動作、点線は開発・書き込みの関係です。実機LEDはD2〜D6の5施設です。4号館・レストラン棟はLED未実装です。
 
 図は[stack-diagram](https://github.com/caru-ini/stack-diagram)で作成しています。[HTML版（保存して開く）](docs/diagrams/campus-guide.html)と[作成手順・出典](docs/diagrams/README.md)も同梱しています。HTML版は構成図を表示するファイルです。
 
@@ -70,7 +70,7 @@ USB接続はPythonが管理し、ブラウザからArduinoへ直接接続するW
 - Python 3.10以上（WindowsではPython LauncherまたはPATH設定が必要）
 - Chrome、Edge、Safari等の現在のブラウザ
 - 初回セットアップ時のインターネット接続
-- 実機利用時: Arduino Uno R3、データ通信対応USBケーブル、設定した6施設分の配線済みLED
+- 実機利用時: Arduino Uno R3、データ通信対応USBケーブル、設定した5施設分の配線済みLED
 - 初回書き込み時: Arduino IDE 2（またはVS CodeのPlatformIO IDE拡張 / PlatformIO CLI）
 
 通常起動にはNode.jsやPlatformIOは不要です。初回にPython依存関係を入れたあとは、地図を含めオフラインで動きます。
@@ -150,11 +150,11 @@ Windowsでは`python3`を`py -3`、`.venv/bin/python`を`.venv\Scripts\python.ex
 | D | 5号館 | D4 |
 | E | 6号館 | D5 |
 | F | 7号館 | D6 |
-| H | レストラン棟 | D7（仮設定） |
+| H | レストラン棟 | LED未実装（実機対象外） |
 | 0 | 全消灯 | — |
 
-実機LEDは1・3・5・6・7号館とレストラン棟の6施設を設定しています。レストラン棟はユーザー指定でD7に仮設定しているため、実配線を確認してください。
-4号館はLED未実装のため、実機へ点灯命令を送りません。施設情報は14施設を案内します。従来の7施設はシミュレーションで点灯表示できます。図書館新館・体育館・創薬棟・新研究棟・弓道場・2号館は画面案内のみです。
+実機LEDは1・3・5・6・7号館の5施設で、D2〜D6を使用します（2026-11-05の実配線確認を反映）。
+4号館・レストラン棟はLED未実装のため、実機へ点灯命令を送りません。施設情報は14施設を案内します。従来の7施設はシミュレーションで点灯表示できます。図書館新館・体育館・創薬棟・新研究棟・弓道場・2号館は画面案内のみです。
 旧スケッチとは配線が異なるため、今回の更新時はArduinoへスケッチを再度書き込んでください。
 
 各ピン→220〜330Ω抵抗→LED→GNDと配線します。LEDごとに抵抗が必要です。詳細は[配線と書き込み](docs/HARDWARE.md)を参照してください。
@@ -171,7 +171,7 @@ pio run --target upload
 
 VS Codeでは`firmware/`をPlatformIOで開いてBuild→Uploadでも書き込めます。初回の書き込み以後は、電源投入時に自動実行されます。アプリの使用前にシリアルモニターを閉じてください。
 
-通信は9600bps、ASCII、LF区切りです。`A\n`に`OK:A\n`、`0\n`に`OK:0\n`が返ります。接続には`READY:CAMPUS:3`の起動通知が必要です。古い配線のv1/v2スケッチは接続を拒否します。詳しくは[通信設計](docs/ARCHITECTURE.md)を参照してください。
+通信は9600bps、ASCII、LF区切りです。`A\n`に`OK:A\n`、`0\n`に`OK:0\n`が返ります。接続には`READY:CAMPUS:4`の起動通知が必要です。古い配線のv1/v2/v3スケッチは接続を拒否します。詳しくは[通信設計](docs/ARCHITECTURE.md)を参照してください。
 
 ## データの追加
 
@@ -234,7 +234,7 @@ pio run
 
 Pythonテストは65件です。ファームウェアの論理テスト1件にはC++コンパイラ（clang++またはg++）が必要です。シリアル結合テスト11件には、さらにmacOS/LinuxのPOSIX仮想ポートが必要です。条件を満たさないテストはスキップします。Node.jsはJavaScriptの構文確認と、下記のDOM結合テストに使用します。
 
-結合テストでは`Flask API → 実際のpySerial → OSの仮想シリアルポート → 実際のmain.cpp → 模擬ピン出力`をつなぎ、設定した6施設の点灯・消灯、未実装施設の命令拒否、連続選択、切断・再接続、通信停止時の自動消灯を確認します。`Serial`・時計・GPIOは検証用の代替実装です。USB回路、UnoのDTR自動リセット、配線、LEDの実際の点灯を保証するものではありません。
+結合テストでは`Flask API → 実際のpySerial → OSの仮想シリアルポート → 実際のmain.cpp → 模擬ピン出力`をつなぎ、設定した5施設の点灯・消灯、未実装施設の命令拒否、連続選択、切断・再接続、通信停止時の自動消灯を確認します。`Serial`・時計・GPIOは検証用の代替実装です。USB回路、UnoのDTR自動リセット、配線、LEDの実際の点灯を保証するものではありません。
 
 結合テストだけを実行する場合:
 
@@ -255,7 +255,7 @@ Node.jsは`tests/package.json`のenginesを満たす版を使用します。Pyth
 
 ## Mac / Windowsの検証
 
-OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。2026-11-02の[GitHub Actions実行](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41379844775)で、Mac（Intel／ARM64）とWindows Server 2025の4環境すべて成功しました。WindowsではChromium／Edge、Mac ARM64ではChromium／WebKitの画面操作も確認しました。Arduino実機のUSB・配線・点灯は未確認です。
+OS用の起動ファイル・初回セットアップ・検索・模擬点灯・ブラウザ操作・オフライン再起動を確認する検証スクリプトを用意しています。実行方法とOSごとの確認範囲は[Mac / Windowsの動作検証](docs/PLATFORM_VALIDATION.md)を参照してください。2026-11-02の[GitHub Actions実行](https://github.com/880null/aomoriuniv-campus-guide/actions/runs/41379844775)で、Mac（Intel／ARM64）とWindows Server 2025の4環境すべて成功しました。WindowsではChromium／Edge、Mac ARM64ではChromium／WebKitの画面操作も確認しました。2026-11-05にD2〜D6の5施設・通信v4へ更新し、Macで実機への書き込み・USB接続・Web APIの命令応答を確認しました。発光・配線の最終確認状況は[実機検証記録](docs/HARDWARE_VALIDATION_2026-11-05.md)を参照してください。以前のCIはv3の結果です。
 
 ## 困ったとき
 

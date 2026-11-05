@@ -98,8 +98,9 @@ h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 
 /* group labels sit on the group's tint, not on a white tile: in the dark theme swap in the brand's own
    dark-theme logo (lt/dk pair), or give a mark with black parts a white plate */
 .g-label img.dk, .tile img.dk { display:none; }
-[data-theme="dark"] .g-label img.lt, [data-theme="dark"] .tile img.lt { display:none; }
-[data-theme="dark"] .g-label img.dk, [data-theme="dark"] .tile img.dk { display:block; }
+/* 白い台座では明暗テーマとも同じロゴを使用する。 */
+[data-theme="dark"] .g-label img.lt, [data-theme="dark"] .tile img.lt { display:block; }
+[data-theme="dark"] .g-label img.dk, [data-theme="dark"] .tile img.dk { display:none; }
 [data-theme="dark"] .g-label img.plate { background:#fff; border-radius:3px; padding:2px; width:18px; height:18px; }
 .group.ga { border:1.5px solid var(--color-g1); background: var(--color-g1-tint); }
 .group.ga-nested { border:1.5px dashed var(--color-g1-soft); }
@@ -198,7 +199,7 @@ path.aws { stroke: var(--color-ink); stroke-width:1.6; fill:none; }
 <path class="e" d="M756 460 H964" marker-end="url(#ar)"/>
 <text class="el a" x="860" y="452" text-anchor="middle">USB / 9600bps</text>
 <path class="e" d="M1000 540 V674" marker-end="url(#ar)"/>
-<text class="el a" x="1010" y="610">D2–D7</text>
+<text class="el a" x="1010" y="610">D2–D6</text>
 <!-- 同梱データの参照と、USBへ送信しないシミュレーションの分岐。 -->
 <path class="n" d="M200 674 V600 H450 V540" marker-end="url(#ar)"/>
 <text class="el" x="320" y="592" text-anchor="middle">PNG / PDF</text>
@@ -223,7 +224,7 @@ path.aws { stroke: var(--color-ink); stroke-width:1.6; fill:none; }
 <div class="node" style="left:404px;top:680px"><div class="tile"><img src="%%ICON_simulation%%" alt=""></div><div class="name"><span>シミュレーション</span></div><div class="role"><span>画面上で点灯を確認</span></div></div>
 <div class="node" style="left:654px;top:680px"><div class="tile"><img src="%%ICON_data%%" alt=""></div><div class="name"><span>JSONデータ</span></div><div class="role"><span>施設・教室・地図</span></div></div>
 <div class="node" style="left:934px;top:430px"><div class="tile"><img src="%%ICON_arduino%%" alt=""></div><div class="name"><span>Arduino Uno R3</span></div><div class="role"><span>Arduino / C++</span></div></div>
-<div class="node" style="left:934px;top:680px"><div class="tile"><img src="%%ICON_led%%" alt=""></div><div class="name"><span>建物LED ×6</span></div><div class="role"><span>選択した1施設のみ点灯</span></div></div>
+<div class="node" style="left:934px;top:680px"><div class="tile"><img src="%%ICON_led%%" alt=""></div><div class="name"><span>建物LED ×5</span></div><div class="role"><span>選択した1施設のみ点灯</span></div></div>
 <div class="node" style="left:64px;top:980px"><div class="tile"><img src="%%ICON_vscode%%" alt=""></div><div class="name"><span>VS Code</span></div><div class="role"><span>編集・開発</span></div></div>
 <div class="node" style="left:234px;top:980px"><div class="tile"><img src="%%ICON_platformio%%" alt=""></div><div class="name"><span>PlatformIO</span></div><div class="role"><span>ビルド・書込の選択肢</span></div></div>
 <div class="node" style="left:404px;top:980px"><div class="tile"><img src="%%ICON_arduino%%" alt=""></div><div class="name"><span>Arduino IDE</span></div><div class="role"><span>ビルド・書込の選択肢</span></div></div>

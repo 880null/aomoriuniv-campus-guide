@@ -114,7 +114,7 @@ class SerialIntegrationTests(unittest.TestCase):
         self.assertEqual(state["led_state"], "off")
 
     def test_confirmed_buildings_and_off_through_api_and_real_serial(self):
-        for key, pin in zip("ABDEFH", range(2, 8)):
+        for key, pin in zip("ABDEF", range(2, 7)):
             with self.subTest(building=key, pin=pin):
                 response = self.client.post("/api/select", json={"building_id": key})
                 self.assertEqual(response.status_code, 200, response.json)
@@ -200,15 +200,15 @@ class SerialIntegrationTests(unittest.TestCase):
         self.assertPins()
 
     def test_repeated_selections_keep_ack_and_outputs_in_sync(self):
-        for key in "ABDEFH" * 24:
+        for key in "ABDEF" * 24:
             response = self.client.post("/api/select", json={"building_id": key})
             self.assertEqual(response.status_code, 200, response.json)
             self.assertEqual(response.json["status"]["active_building"], key)
-        self.assertPins(7)
+        self.assertPins(6)
 
     def test_unconfirmed_buildings_cannot_light_a_different_building(self):
         self.client.post("/api/select", json={"building_id": "D"})
-        for key in "C":
+        for key in "CH":
             with self.subTest(building=key):
                 response = self.client.post("/api/select", json={"building_id": key})
                 self.assertEqual(response.status_code, 400)

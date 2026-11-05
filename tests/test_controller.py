@@ -18,7 +18,7 @@ class FakeSerial:
     def __init__(self, **kwargs):
         self.is_open = True
         self.timeout = kwargs["timeout"]
-        self.responses = [b"READY:CAMPUS:3\n"]
+        self.responses = [b"READY:CAMPUS:4\n"]
         self.commands = []
         self.active = "0"
         self.bad_response = None
@@ -68,7 +68,7 @@ class ControllerTests(unittest.TestCase):
 
     def test_each_selection_then_off(self):
         self.connected()
-        for key in "ABDEFH":
+        for key in "ABDEF":
             self.assertEqual(self.controller.select(key)["active_building"], key)
         self.assertEqual(self.controller.select("0")["led_state"], "off")
 
@@ -158,15 +158,15 @@ class ControllerTests(unittest.TestCase):
     def test_concurrent_commands_do_not_mix_responses(self):
         self.connected()
         with ThreadPoolExecutor(max_workers=7) as pool:
-            results = list(pool.map(self.controller.select, "ABDEFH" * 3))
+            results = list(pool.map(self.controller.select, "ABDEF" * 3))
         self.assertTrue(all(r["connected"] for r in results))
-        self.assertEqual([r["active_building"] for r in results], list("ABDEFH" * 3))
+        self.assertEqual([r["active_building"] for r in results], list("ABDEF" * 3))
 
     def test_unconfirmed_pins_are_blocked_without_serial_write(self):
         device = self.connected()
         self.controller.select("A")
         commands = device.commands.copy()
-        for key in "C":
+        for key in "CH":
             with self.subTest(building=key):
                 with self.assertRaisesRegex(ValueError, "未確認"):
                     self.controller.select(key)
@@ -174,7 +174,7 @@ class ControllerTests(unittest.TestCase):
                 self.assertEqual(self.controller.snapshot()["active_building"], "A")
 
     def test_old_wiring_firmware_is_rejected(self):
-        for version in (1, 2):
+        for version in (1, 2, 3):
             with self.subTest(version=version):
                 device = FakeSerial(timeout=0.2)
                 device.responses = [f"READY:CAMPUS:{version}\r\n".encode()]
@@ -204,7 +204,7 @@ class ControllerTests(unittest.TestCase):
 
     def test_fragmented_boot_notification_is_reassembled(self):
         device = FakeSerial(timeout=0.2)
-        device.responses = [b"READY:CAMP", b"US:3\r\n"]
+        device.responses = [b"READY:CAMP", b"US:4\r\n"]
         self.factory.side_effect = None
         self.factory.return_value = device
         with unittest.mock.patch("backend.controller.time.monotonic", side_effect=range(8)):
@@ -212,7 +212,7 @@ class ControllerTests(unittest.TestCase):
 
     def test_overlong_boot_line_cannot_hide_a_valid_suffix(self):
         device = FakeSerial(timeout=0.2)
-        device.responses = [b"x" * 64, b"READY:CAMPUS:3\n"]
+        device.responses = [b"x" * 64, b"READY:CAMPUS:4\n"]
         self.factory.side_effect = None
         self.factory.return_value = device
         with unittest.mock.patch("backend.controller.time.monotonic", side_effect=range(8)):
@@ -222,7 +222,7 @@ class ControllerTests(unittest.TestCase):
 
     def test_valid_boot_line_after_oversized_noise_is_accepted(self):
         device = FakeSerial(timeout=0.2)
-        device.responses = [b"x" * 64, b"noise\n", b"READY:CAMPUS:3\r\n"]
+        device.responses = [b"x" * 64, b"noise\n", b"READY:CAMPUS:4\r\n"]
         self.factory.side_effect = None
         self.factory.return_value = device
         with unittest.mock.patch("backend.controller.time.monotonic", side_effect=range(8)):
